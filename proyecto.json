@@ -1,0 +1,96 @@
+{
+  "empresa_nombre": "Air Vision",
+
+  "config": {
+    "whatsapp_numero": "5491131083110",
+    "whatsapp_mensaje_default": "Hola Air Vision, quería consultar por una filmación aérea",
+    "formspree_id": "DESACTIVADO",
+    "colors": {
+      "primary": "#0EA5E9",
+      "primary_dark": "#0369A1"
+    }
+  },
+
+  "chatbot": {
+    "nombre": "Asistente Air Vision",
+    "saludo": "Hola, soy el asistente de Air Vision. Puedo contarte sobre filmación aérea, zonas, tiempos de entrega y más. ¿Qué querés saber?"
+  },
+
+  "web_content": {
+    "hero": {
+      "titulo": "Una nueva perspectiva para tus proyectos",
+      "subtitulo": "Fotografía y video aéreo profesional con drones en CABA y GBA. Construcción, inmobiliaria y deportes."
+    },
+
+    "quienes_somos": {
+      "texto": "Air Vision es un servicio de fotografía y video aéreo dirigido por un piloto de drones con 2 años de experiencia operando en Buenos Aires. Trabajos para Remax y filmaciones en el Autódromo de Buenos Aires son parte del recorrido. Cada proyecto se entrega con el formato que el cliente necesite: material editado o crudo, listo para que se integre a tu flujo de trabajo."
+    },
+
+    "servicios": [
+      {
+        "titulo": "Construcción y Obra",
+        "descripcion": "Avance de obra documentado desde el aire, inspecciones de techos, fachadas y zonas de difícil acceso. Material periódico para reportes a clientes, inversores o auditorías.",
+        "keywords": ["construccion", "obra", "avance", "inspeccion", "edificio", "techo", "fachada", "constructora", "ingenieria", "arquitectura", "proyecto", "auditoria", "informe"]
+      },
+      {
+        "titulo": "Inmobiliaria",
+        "descripcion": "Filmación y fotografía aérea de propiedades, departamentos, casas, lotes y terrenos. Material que diferencia un listado y vende más rápido. Pensado para inmobiliarias, brokers y desarrolladores.",
+        "keywords": ["inmobiliaria", "propiedad", "departamento", "casa", "terreno", "lote", "venta", "alquiler", "broker", "inmueble", "real estate", "remax", "vivienda", "duplex", "ph"]
+      },
+      {
+        "titulo": "Deportes y Aventura",
+        "descripcion": "Filmación de eventos deportivos, carreras, motorsport, deportes outdoor y de aventura. Tomas dinámicas con seguimiento aéreo, ideales para coberturas, productoras y atletas.",
+        "keywords": ["deporte", "evento", "carrera", "autodromo", "motorsport", "auto", "moto", "outdoor", "aventura", "atleta", "competencia", "deportivo", "produccion"]
+      }
+    ],
+
+    "faq": [
+      {
+        "pregunta": "¿En qué zonas operás?",
+        "respuesta": "Operamos en CABA (Capital Federal) y todo el GBA (Gran Buenos Aires). Para trabajos fuera de esa zona, consultar por WhatsApp para evaluar viabilidad y costos de traslado.",
+        "keywords": ["zona", "donde", "operan", "operas", "lugar", "ubicacion", "caba", "gba", "buenos aires", "capital", "provincia", "viajan", "interior", "cobertura", "area"]
+      },
+      {
+        "pregunta": "¿Cuánto demora la entrega del material?",
+        "respuesta": "El tiempo estimado de entrega es de 3 a 7 días hábiles según la complejidad del trabajo y el tipo de edición acordada. Para urgencias podés consultar por WhatsApp y vemos disponibilidad.",
+        "keywords": ["tiempo", "demora", "tardan", "entrega", "plazo", "cuando", "rapido", "urgente", "dias", "demora", "espera", "listo", "edicion"]
+      },
+      {
+        "pregunta": "¿Entregás material editado o crudo?",
+        "respuesta": "Se entrega como el cliente necesite. Podemos entregar material crudo (footage sin editar) para que tu equipo lo trabaje, o material totalmente editado y listo para publicar. Lo definimos antes de empezar.",
+        "keywords": ["editar", "edicion", "editado", "crudo", "bruto", "footage", "material", "raw", "sin editar", "entrega", "formato", "video", "post produccion"]
+      },
+      {
+        "pregunta": "¿Qué pasa si el clima no acompaña?",
+        "respuesta": "No se vuela en condiciones climáticas adversas (lluvia, viento fuerte, baja visibilidad). La decisión queda a criterio del piloto, priorizando seguridad y calidad del material. Si hay que reagendar, lo coordinamos sin costo adicional.",
+        "keywords": ["clima", "lluvia", "viento", "tormenta", "vuela", "vuelan", "condiciones", "reagendar", "cancelar", "tiempo", "mal tiempo", "seguridad", "viable"]
+      },
+      {
+        "pregunta": "¿Cómo se cotiza un trabajo?",
+        "respuesta": "Cada proyecto se cotiza a medida según ubicación, duración del trabajo, tipo de entrega (crudo o editado) y complejidad. Contame qué necesitás por WhatsApp o el formulario y armamos un presupuesto.",
+        "keywords": ["precio", "precios", "costo", "cotizar", "cotizacion", "presupuesto", "cuanto", "valor", "tarifa", "honorarios", "pagar", "salir"]
+      },
+      {
+        "pregunta": "¿Qué tipo de proyectos hiciste antes?",
+        "respuesta": "Trabajos de filmación inmobiliaria con Remax y cobertura aérea en el Autódromo de Buenos Aires, entre otros. Cada rubro se aborda con un enfoque distinto según el resultado que necesite el cliente.",
+        "keywords": ["experiencia", "trabajos", "antes", "clientes", "proyectos", "remax", "autodromo", "portfolio", "ejemplo", "muestra", "trayectoria", "antiguedad"]
+      }
+    ],
+
+    "precios": {
+      "planes": [
+        {
+          "nombre": "Cotización a medida",
+          "rango": "Consultar",
+          "incluye": [
+            "Análisis del proyecto y locación",
+            "Plan de vuelo personalizado",
+            "Filmación / fotografía aérea según objetivo",
+            "Material entregado en el formato que necesites (crudo o editado)",
+            "Asesoramiento sobre el mejor uso del material"
+          ]
+        }
+      ]
+    }
+  }
+}
