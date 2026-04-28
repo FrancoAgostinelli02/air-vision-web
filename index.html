@@ -643,10 +643,55 @@
     .works-carousel__nav--next { right: 14px; }
     .works-carousel__nav svg { width: 18px; height: 18px; stroke-width: 2; }
 
-    @media (max-width: 600px) {
-      .works-carousel__nav { width: 38px; height: 38px; }
-      .works-carousel__nav--prev { left: 8px; }
-      .works-carousel__nav--next { right: 8px; }
+    /* ── Mobile carousel overrides (≤ 640px) ──── */
+    @media (max-width: 640px) {
+
+      /* Imagen más alta: 4:3 en vez de 16:9 */
+      .works-carousel__slide .image-slot {
+        aspect-ratio: 4 / 3;
+      }
+
+      /* Ocultar caption overlay — tapaba la imagen */
+      .works-carousel__caption { display: none; }
+
+      /* Ocultar contador y expand hint */
+      .works-carousel__counter   { display: none; }
+      .works-carousel__expand-hint { display: none; }
+
+      /* Flechas: salen del viewport, van a una fila debajo de la imagen */
+      .works-carousel {
+        display: grid;
+        grid-template-areas:
+          "prog  prog  prog"
+          "view  view  view"
+          "prev  dots  next";
+        grid-template-columns: 48px 1fr 48px;
+        grid-template-rows: 2px 1fr auto;
+        gap: 0;
+      }
+      .works-carousel__progress  { grid-area: prog; }
+      .works-carousel__viewport  { grid-area: view; cursor: zoom-in; }
+      .works-carousel__thumbs    { grid-area: dots; align-self: center; margin-top: 0.75rem; }
+
+      .works-carousel__nav {
+        position: static;
+        transform: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-top: 0.75rem;
+        align-self: start;
+        background: var(--surface);
+        border-color: var(--border-strong);
+      }
+      .works-carousel__nav:active { transform: scale(0.93); }
+      .works-carousel__nav--prev { grid-area: prev; justify-self: center; }
+      .works-carousel__nav--next { grid-area: next; justify-self: center; }
+
+      /* Thumbnails más grandes en mobile */
+      .works-carousel__thumb {
+        width: clamp(48px, 13vw, 72px);
+      }
     }
 
     /* Counter badge */
