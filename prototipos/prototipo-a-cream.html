@@ -1,0 +1,230 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Airvision — Prototipo A: Editorial Cream</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&family=Barlow+Condensed:wght@700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream:  #EDE8DC;
+      --navy:   #1B2240;
+      --orange: #E13419;
+      --blue:   #2A5CB3;
+      --border: rgba(27,34,64,.10);
+      --border-md: rgba(27,34,64,.20);
+      --muted:  rgba(27,34,64,.50);
+    }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'DM Sans',system-ui,sans-serif; background:var(--cream); color:var(--navy); overflow-x:hidden; -webkit-font-smoothing:antialiased; }
+    a { text-decoration:none; color:inherit; }
+    img { display:block; max-width:100%; }
+
+    /* ── NAV ── */
+    .nav {
+      position:fixed; top:0; left:0; right:0; z-index:50;
+      background:var(--cream); border-bottom:1px solid var(--border);
+      display:flex; align-items:center; justify-content:space-between;
+      padding:1.1rem clamp(1.5rem,4vw,3rem);
+    }
+    .brand { display:flex; align-items:center; gap:.65rem; font-weight:500; font-size:1rem; letter-spacing:.04em; }
+    .brand svg { width:38px; height:auto; }
+    .nav-links { display:flex; gap:2.5rem; list-style:none; font-size:.84rem; }
+    .nav-links a { color:var(--muted); transition:color 180ms; }
+    .nav-links a:hover { color:var(--navy); }
+    @media(max-width:760px){ .nav-links{display:none;} }
+    .nav-cta {
+      padding:.6rem 1.35rem; background:var(--navy); color:var(--cream);
+      font-size:.8rem; font-weight:500; letter-spacing:.03em;
+      border-radius:2px; transition:background 200ms;
+    }
+    .nav-cta:hover { background:var(--orange); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height:100dvh; padding:10rem clamp(1.5rem,4vw,3rem) 5rem;
+      display:flex; flex-direction:column; justify-content:flex-end;
+      border-bottom:1px solid var(--border); position:relative; overflow:hidden;
+    }
+    .hero-trama {
+      position:absolute; inset:0; opacity:.035; pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='110' height='110' viewBox='0 0 110 110'%3E%3Cg fill='none' stroke='%231B2240' stroke-width='1.5'%3E%3Cpolygon points='8,85 22,85 55,18 41,18'/%3E%3Cpolygon points='41,18 55,18 66,44 52,44'/%3E%3Cpolygon points='72,44 83,18 97,18 82,60 71,60'/%3E%3C/g%3E%3C/svg%3E");
+      background-size:110px;
+    }
+    .hero-eyebrow {
+      font-size:.7rem; letter-spacing:.26em; text-transform:uppercase;
+      color:var(--muted); margin-bottom:1.75rem;
+      display:flex; align-items:center; gap:.9rem;
+    }
+    .hero-eyebrow::before { content:''; width:28px; height:1px; background:var(--orange); }
+    .hero-title {
+      font-family:'Barlow Condensed',sans-serif; font-weight:900;
+      font-size:clamp(3.8rem,10vw,9.5rem); line-height:.91;
+      letter-spacing:-.03em; text-transform:uppercase;
+      max-width:14ch; margin-bottom:3rem;
+    }
+    .hero-title em { color:var(--orange); font-style:normal; }
+    .hero-bottom {
+      display:flex; align-items:flex-end; justify-content:space-between;
+      flex-wrap:wrap; gap:2rem;
+    }
+    .hero-sub { font-size:clamp(.95rem,1.2vw,1.05rem); color:var(--muted); max-width:46ch; line-height:1.7; }
+    .hero-actions { display:flex; gap:.75rem; flex-shrink:0; }
+    .btn { display:inline-flex; align-items:center; gap:.5rem; padding:.95rem 1.6rem; font-size:.84rem; font-weight:500; letter-spacing:.02em; transition:all 200ms; }
+    .btn-primary { background:var(--navy); color:var(--cream); }
+    .btn-primary:hover { background:var(--orange); }
+    .btn-outline { border:1px solid var(--border-md); color:var(--navy); }
+    .btn-outline:hover { border-color:var(--navy); }
+
+    /* ── STATS ── */
+    .stats {
+      display:grid; grid-template-columns:repeat(4,1fr);
+      border-bottom:1px solid var(--border);
+    }
+    .stat { padding:2.25rem clamp(1.5rem,4vw,3rem); border-right:1px solid var(--border); }
+    .stat:last-child { border-right:none; }
+    .stat-num { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:clamp(2rem,3.5vw,3rem); line-height:1; }
+    .stat-num span { color:var(--orange); }
+    .stat-label { font-size:.7rem; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); margin-top:.4rem; }
+    @media(max-width:640px){ .stats{grid-template-columns:repeat(2,1fr);} .stat:nth-child(2){border-right:none;} }
+
+    /* ── SERVICES ── */
+    .services { padding:clamp(4rem,8vw,7rem) clamp(1.5rem,4vw,3rem); }
+    .section-top {
+      display:flex; align-items:baseline; justify-content:space-between;
+      flex-wrap:wrap; gap:1.5rem;
+      border-top:1px solid var(--border); padding-top:1.25rem; margin-bottom:clamp(2.5rem,5vw,4.5rem);
+    }
+    .section-label { font-size:.7rem; letter-spacing:.24em; text-transform:uppercase; color:var(--muted); }
+    .section-title { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:clamp(2rem,3.5vw,3.2rem); line-height:.95; letter-spacing:-.02em; text-transform:uppercase; }
+    .services-grid { display:grid; grid-template-columns:repeat(3,1fr); border:1px solid var(--border); }
+    .service-card {
+      padding:2.25rem 2rem 2rem; display:flex; flex-direction:column;
+      border-right:1px solid var(--border); transition:background 240ms,color 240ms;
+      cursor:default;
+    }
+    .service-card:last-child { border-right:none; }
+    .service-card:hover { background:var(--navy); color:var(--cream); }
+    .service-card:hover .service-num { color:var(--orange); }
+    .service-card:hover .service-desc { color:rgba(237,232,220,.55); }
+    .service-card:hover .service-cta { color:var(--orange); }
+    .service-num { font-size:.68rem; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); margin-bottom:1.75rem; transition:color 240ms; }
+    .service-img { width:100%; aspect-ratio:4/3; background:var(--border); margin-bottom:1.5rem; overflow:hidden; }
+    .service-img img { width:100%; height:100%; object-fit:cover; }
+    .service-name { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.75rem; line-height:1; letter-spacing:-.01em; text-transform:uppercase; margin-bottom:.65rem; }
+    .service-desc { font-size:.88rem; line-height:1.65; color:var(--muted); flex:1; margin-bottom:1.5rem; transition:color 240ms; }
+    .service-cta { font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); transition:color 240ms; }
+    @media(max-width:800px){ .services-grid{grid-template-columns:1fr;} .service-card{border-right:none;border-bottom:1px solid var(--border);} .service-card:last-child{border-bottom:none;} }
+
+    /* ── CTA ── */
+    .cta {
+      background:var(--navy); color:var(--cream);
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:clamp(2rem,5vw,5rem); align-items:center;
+      padding:clamp(4rem,8vw,8rem) clamp(1.5rem,4vw,3rem);
+    }
+    @media(max-width:760px){ .cta{grid-template-columns:1fr;} }
+    .cta-title { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:clamp(3rem,5vw,5.5rem); line-height:.9; letter-spacing:-.02em; text-transform:uppercase; }
+    .cta-title em { color:var(--orange); font-style:normal; }
+    .cta-body { font-size:.95rem; color:rgba(237,232,220,.55); line-height:1.7; margin-bottom:2rem; }
+    .btn-cream { display:inline-flex; align-items:center; gap:.5rem; padding:.95rem 1.6rem; background:var(--cream); color:var(--navy); font-size:.84rem; font-weight:600; transition:background 200ms,color 200ms; }
+    .btn-cream:hover { background:var(--orange); color:var(--cream); }
+
+    /* ── FOOTER ── */
+    footer { background:var(--cream); border-top:1px solid var(--border); padding:2rem clamp(1.5rem,4vw,3rem); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; font-size:.78rem; color:var(--muted); }
+
+    /* ── BADGE ── */
+    .badge { position:fixed; bottom:1.5rem; left:1.5rem; z-index:100; background:var(--orange); color:#fff; padding:.45rem 1rem; font-size:.68rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
+  </style>
+</head>
+<body>
+
+<div class="badge">Prototipo A — Editorial Cream</div>
+
+<nav class="nav">
+  <a href="#" class="brand">
+    <svg viewBox="0 0 280 175" fill="var(--navy)" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="12,155 35,155 93,25 70,25"/>
+      <polygon points="70,25 93,25 115,75 92,75"/>
+      <polygon points="128,75 150,25 172,25 145,110 123,110"/>
+    </svg>
+    Airvision
+  </a>
+  <ul class="nav-links">
+    <li><a href="#">Servicios</a></li>
+    <li><a href="#">Trabajos</a></li>
+    <li><a href="#">Sobre</a></li>
+    <li><a href="#">Contacto</a></li>
+  </ul>
+  <a href="#" class="nav-cta">Cotizá tu proyecto</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-trama"></div>
+  <p class="hero-eyebrow">Buenos Aires · CABA &amp; GBA · 34°36′S</p>
+  <h1 class="hero-title">Una nueva <em>perspectiva</em> para tus proyectos</h1>
+  <div class="hero-bottom">
+    <p class="hero-sub">Fotografía y video aéreo profesional con drones. Construcción, inmobiliaria y deportes — entregando material crudo o editado, según lo que tu proyecto necesite.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn btn-primary">Pedir cotización →</a>
+      <a href="#" class="btn btn-outline">Ver trabajos</a>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat"><div class="stat-num">02<span>+</span></div><div class="stat-label">Años en operación</div></div>
+  <div class="stat"><div class="stat-num">3<span>—</span>7</div><div class="stat-label">Días de entrega</div></div>
+  <div class="stat"><div class="stat-num">CABA<span>·</span>GBA</div><div class="stat-label">Cobertura</div></div>
+  <div class="stat"><div class="stat-num">4K<span>↑</span></div><div class="stat-label">Resolución</div></div>
+</div>
+
+<section class="services">
+  <div class="section-top">
+    <span class="section-label">Servicios</span>
+    <h2 class="section-title">Disciplinas en las<br>que volamos</h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-num">01 / Construcción</div>
+      <div class="service-img"><img src="../img/02-construccion.webp" alt="Construcción"></div>
+      <h3 class="service-name">Construcción<br>y obra</h3>
+      <p class="service-desc">Avance de obra desde el aire, inspecciones de techos, fachadas y zonas de difícil acceso.</p>
+      <span class="service-cta">Consultar →</span>
+    </div>
+    <div class="service-card">
+      <div class="service-num">02 / Inmobiliaria</div>
+      <div class="service-img"><img src="../img/03-inmobiliaria.webp" alt="Inmobiliaria"></div>
+      <h3 class="service-name">Inmobiliaria</h3>
+      <p class="service-desc">Filmación y fotografía aérea de propiedades. Material que diferencia un listado y vende más rápido.</p>
+      <span class="service-cta">Consultar →</span>
+    </div>
+    <div class="service-card">
+      <div class="service-num">03 / Deportes</div>
+      <div class="service-img"><img src="../img/04-deportes.webp" alt="Deportes"></div>
+      <h3 class="service-name">Deportes<br>y aventura</h3>
+      <p class="service-desc">Filmación de eventos deportivos, motorsport y deportes outdoor. Tomas dinámicas con seguimiento aéreo.</p>
+      <span class="service-cta">Consultar →</span>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <h2 class="cta-title">Contame qué querés <em>volar</em>.</h2>
+  <div>
+    <p class="cta-body">Mandame los detalles del proyecto — ubicación, tipo de trabajo, fecha estimada — y te devuelvo una cotización a medida en menos de 24 hs hábiles.</p>
+    <a href="#" class="btn-cream">Pedir cotización →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="brand">
+    <svg viewBox="0 0 280 175" fill="var(--navy)" width="28"><polygon points="12,155 35,155 93,25 70,25"/><polygon points="70,25 93,25 115,75 92,75"/><polygon points="128,75 150,25 172,25 145,110 123,110"/></svg>
+    Airvision
+  </div>
+  <span>© 2025 Airvision · Buenos Aires, Argentina</span>
+</footer>
+
+</body>
+</html>

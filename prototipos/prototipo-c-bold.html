@@ -1,0 +1,269 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Airvision — Prototipo C: Orange Bold</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Barlow+Condensed:wght@700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream:  #EDE8DC;
+      --navy:   #1B2240;
+      --orange: #E13419;
+      --border-light: rgba(237,232,220,.12);
+      --border-dark:  rgba(27,34,64,.10);
+      --muted-light:  rgba(237,232,220,.55);
+      --muted-dark:   rgba(27,34,64,.50);
+    }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'DM Sans',system-ui,sans-serif; overflow-x:hidden; -webkit-font-smoothing:antialiased; }
+    a { text-decoration:none; color:inherit; }
+
+    /* ── NAV (sobre orange) ── */
+    .nav {
+      position:fixed; top:0; left:0; right:0; z-index:50;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:1.1rem clamp(1.5rem,4vw,3rem);
+      transition:background 300ms, border-color 300ms;
+      border-bottom:1px solid transparent;
+    }
+    .nav.on-light { background:var(--cream); border-bottom-color:var(--border-dark); }
+    .nav.on-light .brand,
+    .nav.on-light .nav-links a,
+    .nav.on-light .nav-cta { color:var(--navy); }
+    .nav.on-light .nav-cta { border-color:rgba(27,34,64,.25); }
+    .nav:not(.on-light) .brand,
+    .nav:not(.on-light) .nav-links a { color:var(--cream); }
+    .nav:not(.on-light) .nav-cta { color:var(--cream); border-color:rgba(237,232,220,.3); }
+    .brand { display:flex; align-items:center; gap:.65rem; font-weight:400; font-size:1rem; letter-spacing:.06em; text-transform:uppercase; }
+    .brand svg { width:36px; }
+    .nav-links { display:flex; gap:2.5rem; list-style:none; font-size:.83rem; }
+    .nav-links a { opacity:.7; transition:opacity 180ms; }
+    .nav-links a:hover { opacity:1; }
+    @media(max-width:760px){ .nav-links{display:none;} }
+    .nav-cta { padding:.6rem 1.35rem; border:1px solid; font-size:.8rem; font-weight:400; letter-spacing:.04em; border-radius:2px; transition:all 200ms; }
+    .nav-cta:hover { background:var(--orange); border-color:var(--orange); color:#fff !important; }
+
+    /* ── HERO (fondo naranja) ── */
+    .hero {
+      background:var(--orange); color:var(--cream);
+      min-height:100dvh; position:relative; overflow:hidden;
+      display:flex; flex-direction:column; justify-content:flex-end;
+      padding:10rem clamp(1.5rem,4vw,3rem) 5rem;
+    }
+    .hero-trama {
+      position:absolute; inset:0; opacity:.08; pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='110' height='110' viewBox='0 0 110 110'%3E%3Cg fill='none' stroke='%23EDE8DC' stroke-width='1.5'%3E%3Cpolygon points='8,85 22,85 55,18 41,18'/%3E%3Cpolygon points='41,18 55,18 66,44 52,44'/%3E%3Cpolygon points='72,44 83,18 97,18 82,60 71,60'/%3E%3C/g%3E%3C/svg%3E");
+      background-size:110px;
+    }
+    /* Diagonal crop en la base */
+    .hero::after {
+      content:''; position:absolute; bottom:-2px; left:0; right:0; height:120px;
+      background:var(--cream);
+      clip-path:polygon(0 100%, 100% 0, 100% 100%);
+    }
+    .hero-eyebrow {
+      font-size:.7rem; letter-spacing:.26em; text-transform:uppercase;
+      color:rgba(237,232,220,.7); margin-bottom:1.5rem;
+      display:flex; align-items:center; gap:.9rem; position:relative; z-index:1;
+    }
+    .hero-eyebrow::before { content:''; width:28px; height:1px; background:rgba(237,232,220,.5); }
+    .hero-title {
+      font-family:'Barlow Condensed',sans-serif; font-weight:900;
+      font-size:clamp(4rem,11vw,10rem); line-height:.88;
+      letter-spacing:-.03em; text-transform:uppercase;
+      margin-bottom:2.5rem; position:relative; z-index:1;
+    }
+    .hero-title em { font-style:normal; display:block; color:var(--navy); }
+    .hero-bottom {
+      display:flex; align-items:flex-end; justify-content:space-between;
+      flex-wrap:wrap; gap:2rem; position:relative; z-index:1;
+    }
+    .hero-sub { font-size:clamp(.95rem,1.2vw,1.05rem); color:rgba(237,232,220,.75); max-width:44ch; line-height:1.7; }
+    .hero-actions { display:flex; gap:.75rem; flex-shrink:0; }
+    .btn { display:inline-flex; align-items:center; gap:.5rem; padding:.95rem 1.7rem; font-size:.84rem; font-weight:500; letter-spacing:.02em; transition:all 200ms; }
+    .btn-cream { background:var(--cream); color:var(--navy); }
+    .btn-cream:hover { background:var(--navy); color:var(--cream); }
+    .btn-ghost-light { border:1px solid rgba(237,232,220,.4); color:var(--cream); }
+    .btn-ghost-light:hover { border-color:var(--cream); }
+
+    /* ── STATS (cream) ── */
+    .stats {
+      background:var(--cream); color:var(--navy);
+      display:grid; grid-template-columns:repeat(4,1fr);
+      border-bottom:1px solid var(--border-dark);
+    }
+    .stat { padding:2.25rem clamp(1.5rem,4vw,3rem); border-right:1px solid var(--border-dark); }
+    .stat:last-child { border-right:none; }
+    .stat-num { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:clamp(2rem,3.5vw,3rem); line-height:1; }
+    .stat-num span { color:var(--orange); }
+    .stat-label { font-size:.7rem; letter-spacing:.2em; text-transform:uppercase; color:var(--muted-dark); margin-top:.4rem; }
+    @media(max-width:640px){ .stats{grid-template-columns:repeat(2,1fr);} .stat:nth-child(2){border-right:none;} }
+
+    /* ── SERVICES (cream) ── */
+    .services { background:var(--cream); color:var(--navy); padding:clamp(4rem,8vw,7rem) clamp(1.5rem,4vw,3rem); }
+    .section-top {
+      display:flex; align-items:baseline; justify-content:space-between;
+      flex-wrap:wrap; gap:1.5rem;
+      border-top:1px solid var(--border-dark); padding-top:1.25rem; margin-bottom:clamp(2.5rem,5vw,4rem);
+    }
+    .section-label { font-size:.7rem; letter-spacing:.24em; text-transform:uppercase; color:var(--muted-dark); }
+    .section-title { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:clamp(2rem,3.5vw,3.2rem); line-height:.95; letter-spacing:-.02em; text-transform:uppercase; }
+    .services-list { display:flex; flex-direction:column; }
+    .service-row {
+      display:grid; grid-template-columns:80px 1fr auto;
+      align-items:center; gap:2rem;
+      border-top:1px solid var(--border-dark); padding:2rem 0;
+      cursor:default; transition:color 200ms;
+    }
+    .service-row:last-child { border-bottom:1px solid var(--border-dark); }
+    .service-row:hover { color:var(--orange); }
+    .service-row:hover .service-img-small { transform:scale(1.04); }
+    .service-num { font-size:.68rem; letter-spacing:.22em; text-transform:uppercase; color:var(--muted-dark); }
+    .service-row:hover .service-num { color:inherit; }
+    .service-row-body { display:flex; align-items:center; gap:2rem; }
+    .service-img-small { width:80px; height:54px; object-fit:cover; flex-shrink:0; transition:transform 300ms; }
+    .service-name-big { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:clamp(1.8rem,3vw,3rem); line-height:1; letter-spacing:-.02em; text-transform:uppercase; }
+    .service-arr { font-size:1.5rem; color:var(--orange); opacity:0; transition:opacity 200ms; }
+    .service-row:hover .service-arr { opacity:1; }
+    @media(max-width:700px){ .service-row{grid-template-columns:1fr auto;} .service-num{display:none;} .service-img-small{display:none;} }
+
+    /* ── ABOUT (navy) ── */
+    .about {
+      background:var(--navy); color:var(--cream);
+      padding:clamp(4rem,8vw,8rem) clamp(1.5rem,4vw,3rem);
+      display:grid; grid-template-columns:1fr 1fr; gap:clamp(2rem,5vw,6rem); align-items:center;
+    }
+    @media(max-width:800px){ .about{grid-template-columns:1fr;} }
+    .about-title { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:clamp(2.5rem,5vw,5rem); line-height:.9; letter-spacing:-.02em; text-transform:uppercase; margin-bottom:1.5rem; }
+    .about-title em { color:var(--orange); font-style:normal; }
+    .about-body { font-size:.95rem; color:var(--muted-light); line-height:1.7; margin-bottom:2rem; }
+    .creds { border-top:1px solid var(--border-light); }
+    .cred { display:grid; grid-template-columns:100px 1fr; gap:1rem; padding:.9rem 0; border-bottom:1px solid var(--border-light); font-size:.88rem; }
+    .cred-key { color:var(--muted-light); font-size:.7rem; letter-spacing:.16em; text-transform:uppercase; padding-top:.15rem; }
+    .about-img { width:100%; aspect-ratio:4/5; object-fit:cover; }
+    .btn-orange { display:inline-flex; align-items:center; gap:.5rem; padding:.95rem 1.7rem; background:var(--orange); color:#fff; font-size:.84rem; font-weight:500; transition:background 200ms; }
+    .btn-orange:hover { background:#c42e12; }
+
+    /* ── FOOTER ── */
+    footer { background:var(--navy); border-top:1px solid var(--border-light); padding:2rem clamp(1.5rem,4vw,3rem); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; font-size:.78rem; color:var(--muted-light); }
+    footer .brand { color:var(--cream); }
+
+    /* ── BADGE ── */
+    .badge { position:fixed; bottom:1.5rem; left:1.5rem; z-index:100; background:var(--navy); color:var(--cream); padding:.45rem 1rem; font-size:.68rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
+
+    /* Nav scroll */
+    .nav { background:transparent; }
+  </style>
+</head>
+<body>
+
+<div class="badge">Prototipo C — Orange Bold</div>
+
+<nav class="nav" id="nav">
+  <a href="#" class="brand">
+    <svg viewBox="0 0 280 175" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="12,155 35,155 93,25 70,25" fill="currentColor"/>
+      <polygon points="70,25 93,25 115,75 92,75" fill="currentColor"/>
+      <polygon points="128,75 150,25 172,25 145,110 123,110" fill="currentColor"/>
+    </svg>
+    Airvision
+  </a>
+  <ul class="nav-links">
+    <li><a href="#">Servicios</a></li>
+    <li><a href="#">Trabajos</a></li>
+    <li><a href="#">Sobre</a></li>
+    <li><a href="#">Contacto</a></li>
+  </ul>
+  <a href="#" class="nav-cta">Cotizá tu proyecto</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-trama"></div>
+  <p class="hero-eyebrow">Buenos Aires · CABA &amp; GBA · 34°36′S</p>
+  <h1 class="hero-title">Una nueva<br><em>perspectiva</em><br>para tus proyectos</h1>
+  <div class="hero-bottom">
+    <p class="hero-sub">Fotografía y video aéreo profesional con drones. Construcción, inmobiliaria y deportes.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn btn-cream">Pedir cotización →</a>
+      <a href="#" class="btn btn-ghost-light">Ver trabajos</a>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat"><div class="stat-num">02<span>+</span></div><div class="stat-label">Años en operación</div></div>
+  <div class="stat"><div class="stat-num">3<span>—</span>7</div><div class="stat-label">Días de entrega</div></div>
+  <div class="stat"><div class="stat-num">CABA<span>·</span>GBA</div><div class="stat-label">Cobertura</div></div>
+  <div class="stat"><div class="stat-num">4K<span>↑</span></div><div class="stat-label">Resolución</div></div>
+</div>
+
+<section class="services">
+  <div class="section-top">
+    <span class="section-label">Servicios</span>
+    <h2 class="section-title">Disciplinas en las<br>que volamos</h2>
+  </div>
+  <div class="services-list">
+    <div class="service-row">
+      <span class="service-num">01</span>
+      <div class="service-row-body">
+        <img class="service-img-small" src="../img/02-construccion.webp" alt="">
+        <span class="service-name-big">Construcción y obra</span>
+      </div>
+      <span class="service-arr">→</span>
+    </div>
+    <div class="service-row">
+      <span class="service-num">02</span>
+      <div class="service-row-body">
+        <img class="service-img-small" src="../img/03-inmobiliaria.webp" alt="">
+        <span class="service-name-big">Inmobiliaria</span>
+      </div>
+      <span class="service-arr">→</span>
+    </div>
+    <div class="service-row">
+      <span class="service-num">03</span>
+      <div class="service-row-body">
+        <img class="service-img-small" src="../img/04-deportes.webp" alt="">
+        <span class="service-name-big">Deportes y aventura</span>
+      </div>
+      <span class="service-arr">→</span>
+    </div>
+  </div>
+</section>
+
+<section class="about">
+  <div>
+    <h2 class="about-title">Cada proyecto<br>tiene su <em>ángulo</em>.</h2>
+    <p class="about-body">Air Vision es un servicio de fotografía y video aéreo dirigido por un piloto de drones con dos años de experiencia operando en Buenos Aires. Cada proyecto se aborda como un caso único.</p>
+    <ul class="creds">
+      <li class="cred"><span class="cred-key">Experiencia</span><span>2 años en operación profesional</span></li>
+      <li class="cred"><span class="cred-key">Operación</span><span>CABA y GBA</span></li>
+      <li class="cred"><span class="cred-key">Entrega</span><span>Crudo o editado, según necesidad</span></li>
+    </ul>
+    <br>
+    <a href="#" class="btn-orange">Pedir cotización →</a>
+  </div>
+  <img class="about-img" src="../img/01-hero.webp" alt="Drone">
+</section>
+
+<footer>
+  <div class="brand">
+    <svg viewBox="0 0 280 175" fill="currentColor" width="26"><polygon points="12,155 35,155 93,25 70,25"/><polygon points="70,25 93,25 115,75 92,75"/><polygon points="128,75 150,25 172,25 145,110 123,110"/></svg>
+    Airvision
+  </div>
+  <span>© 2025 Airvision · Buenos Aires, Argentina</span>
+</footer>
+
+<script>
+  // Nav cambia color al pasar del hero naranja al cream
+  const nav = document.getElementById('nav');
+  const hero = document.querySelector('.hero');
+  const io = new IntersectionObserver(([e]) => {
+    nav.classList.toggle('on-light', !e.isIntersecting);
+  }, { threshold: 0.1 });
+  io.observe(hero);
+</script>
+
+</body>
+</html>

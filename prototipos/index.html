@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Airvision — Selección de prototipo</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Barlow+Condensed:wght@800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #EDE8DC;
+      --navy:  #1B2240;
+      --orange:#E13419;
+    }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body {
+      font-family:'DM Sans',system-ui,sans-serif;
+      background:var(--navy); color:var(--cream);
+      min-height:100dvh; display:flex; flex-direction:column;
+      -webkit-font-smoothing:antialiased;
+    }
+    a { text-decoration:none; color:inherit; }
+
+    header {
+      padding:3rem clamp(1.5rem,5vw,4rem) 2.5rem;
+      border-bottom:1px solid rgba(237,232,220,.08);
+      display:flex; align-items:center; gap:1rem;
+    }
+    .logo { display:flex; align-items:center; gap:.65rem; }
+    .logo svg { width:32px; }
+    .logo-name { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.1rem; letter-spacing:.06em; text-transform:uppercase; }
+    .header-sep { width:1px; height:24px; background:rgba(237,232,220,.15); margin:0 .5rem; }
+    .header-label { font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; color:rgba(237,232,220,.4); }
+
+    main { flex:1; padding:clamp(2.5rem,5vw,4rem) clamp(1.5rem,5vw,4rem); }
+
+    .intro { margin-bottom:3rem; }
+    .intro-title {
+      font-family:'Barlow Condensed',sans-serif; font-weight:900;
+      font-size:clamp(2.2rem,5vw,4rem); line-height:.92; letter-spacing:-.02em; text-transform:uppercase;
+      margin-bottom:.85rem;
+    }
+    .intro-title em { color:var(--orange); font-style:normal; }
+    .intro-sub { font-size:.92rem; color:rgba(237,232,220,.5); max-width:55ch; line-height:1.65; }
+
+    .grid {
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:1.25rem;
+    }
+    @media(max-width:900px){ .grid{grid-template-columns:1fr;} }
+
+    .card {
+      display:flex; flex-direction:column;
+      border:1px solid rgba(237,232,220,.1);
+      border-radius:4px; overflow:hidden;
+      transition:border-color 240ms, transform 240ms;
+      background:rgba(237,232,220,.03);
+    }
+    .card:hover { border-color:rgba(237,232,220,.25); transform:translateY(-3px); }
+
+    .card-preview {
+      aspect-ratio:16/10; overflow:hidden; position:relative;
+    }
+    .card-preview iframe {
+      width:200%; height:200%;
+      transform:scale(.5); transform-origin:top left;
+      pointer-events:none; border:none;
+    }
+    .card-preview .overlay {
+      position:absolute; inset:0; z-index:2;
+    }
+
+    /* Colores de preview por variante */
+    .preview-a { background:var(--cream); }
+    .preview-b { background:var(--navy); }
+    .preview-c { background:var(--orange); }
+
+    .preview-mock {
+      width:100%; height:100%;
+      display:flex; flex-direction:column;
+      padding:1.5rem;
+      gap:.75rem;
+    }
+    .mock-nav {
+      display:flex; align-items:center; justify-content:space-between;
+      padding-bottom:.75rem;
+      border-bottom:1px solid;
+    }
+    .mock-logo { display:flex; align-items:center; gap:.4rem; font-size:.55rem; letter-spacing:.05em; font-weight:500; font-family:'Barlow Condensed',sans-serif; }
+    .mock-logo svg { width:18px; }
+    .mock-links { display:flex; gap:.6rem; }
+    .mock-dot { width:18px; height:2px; border-radius:1px; opacity:.4; }
+    .mock-hero { flex:1; display:flex; flex-direction:column; justify-content:flex-end; gap:.4rem; padding-top:.5rem; }
+    .mock-eyebrow { font-size:.38rem; letter-spacing:.15em; opacity:.4; text-transform:uppercase; }
+    .mock-title { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:clamp(.9rem,3vw,1.6rem); line-height:.9; text-transform:uppercase; letter-spacing:-.01em; }
+    .mock-title em { font-style:normal; }
+    .mock-sub { font-size:.38rem; opacity:.4; line-height:1.5; max-width:24ch; }
+    .mock-btns { display:flex; gap:.3rem; margin-top:.25rem; }
+    .mock-btn { font-size:.35rem; letter-spacing:.05em; padding:.25rem .55rem; }
+
+    /* Variante A */
+    .preview-a .mock-nav { border-color:rgba(27,34,64,.12); }
+    .preview-a .mock-logo, .preview-a .mock-title, .preview-a .mock-eyebrow { color:var(--navy); }
+    .preview-a .mock-sub { color:var(--navy); }
+    .preview-a .mock-title em { color:var(--orange); }
+    .preview-a .mock-dot { background:var(--navy); }
+    .preview-a .mock-btn-p { background:var(--navy); color:var(--cream); }
+    .preview-a .mock-btn-g { border:1px solid rgba(27,34,64,.25); color:var(--navy); }
+
+    /* Variante B */
+    .preview-b .mock-nav { border-color:rgba(237,232,220,.1); }
+    .preview-b .mock-logo, .preview-b .mock-title, .preview-b .mock-eyebrow, .preview-b .mock-sub { color:var(--cream); }
+    .preview-b .mock-title em { color:var(--orange); }
+    .preview-b .mock-dot { background:var(--cream); }
+    .preview-b .mock-btn-p { background:var(--orange); color:#fff; }
+    .preview-b .mock-btn-g { border:1px solid rgba(237,232,220,.2); color:var(--cream); }
+
+    /* Variante C */
+    .preview-c .mock-nav { border-color:rgba(237,232,220,.2); }
+    .preview-c .mock-logo, .preview-c .mock-title, .preview-c .mock-eyebrow, .preview-c .mock-sub { color:var(--cream); }
+    .preview-c .mock-title em { color:var(--navy); }
+    .preview-c .mock-dot { background:var(--cream); }
+    .preview-c .mock-btn-p { background:var(--cream); color:var(--navy); }
+    .preview-c .mock-btn-g { border:1px solid rgba(237,232,220,.35); color:var(--cream); }
+
+    .card-body { padding:1.5rem 1.5rem 1.75rem; display:flex; flex-direction:column; gap:.65rem; flex:1; }
+    .card-tag { font-size:.65rem; letter-spacing:.22em; text-transform:uppercase; color:var(--orange); font-weight:500; }
+    .card-name { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.4rem; letter-spacing:-.01em; text-transform:uppercase; line-height:1; }
+    .card-desc { font-size:.84rem; color:rgba(237,232,220,.5); line-height:1.6; flex:1; }
+    .card-cta {
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.75rem 1.35rem; font-size:.8rem; font-weight:500; letter-spacing:.02em;
+      background:var(--orange); color:#fff; border-radius:2px;
+      transition:background 200ms; align-self:flex-start; margin-top:.25rem;
+    }
+    .card-cta:hover { background:#c42e12; }
+
+    footer {
+      border-top:1px solid rgba(237,232,220,.08);
+      padding:1.5rem clamp(1.5rem,5vw,4rem);
+      font-size:.75rem; color:rgba(237,232,220,.3);
+      display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <svg viewBox="0 0 280 175" fill="var(--cream)" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="12,155 35,155 93,25 70,25"/>
+      <polygon points="70,25 93,25 115,75 92,75"/>
+      <polygon points="128,75 150,25 172,25 145,110 123,110"/>
+    </svg>
+    <span class="logo-name">Airvision</span>
+  </div>
+  <div class="header-sep"></div>
+  <span class="header-label">Selección de diseño</span>
+</header>
+
+<main>
+  <div class="intro">
+    <h1 class="intro-title">Elegí tu <em>dirección</em><br>de diseño</h1>
+    <p class="intro-sub">3 propuestas basadas en la identidad de marca de Airvision. Hacé click en "Ver prototipo" para explorar cada versión completa.</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- Prototipo A -->
+    <div class="card">
+      <div class="card-preview preview-a">
+        <div class="preview-mock">
+          <div class="mock-nav">
+            <div class="mock-logo">
+              <svg viewBox="0 0 280 175" fill="var(--navy)"><polygon points="12,155 35,155 93,25 70,25"/><polygon points="70,25 93,25 115,75 92,75"/><polygon points="128,75 150,25 172,25 145,110 123,110"/></svg>
+              Airvision
+            </div>
+            <div class="mock-links">
+              <div class="mock-dot"></div>
+              <div class="mock-dot"></div>
+              <div class="mock-dot"></div>
+              <div class="mock-dot"></div>
+            </div>
+          </div>
+          <div class="mock-hero">
+            <div class="mock-eyebrow">Buenos Aires · CABA & GBA</div>
+            <div class="mock-title">Una nueva<br><em>perspectiva</em><br>para tus proyectos</div>
+            <div class="mock-sub">Fotografía y video aéreo profesional con drones.</div>
+            <div class="mock-btns">
+              <div class="mock-btn mock-btn-p">Pedir cotización →</div>
+              <div class="mock-btn mock-btn-g">Ver trabajos</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <span class="card-tag">Prototipo A</span>
+        <h2 class="card-name">Editorial Cream</h2>
+        <p class="card-desc">Fondo crema cálido, tipografía navy, naranja como acento. Sofisticado y elegante. Las tarjetas de servicios se invierten a navy al hover.</p>
+        <a href="prototipo-a-cream.html" target="_blank" class="card-cta">Ver prototipo →</a>
+      </div>
+    </div>
+
+    <!-- Prototipo B -->
+    <div class="card">
+      <div class="card-preview preview-b">
+        <div class="preview-mock">
+          <div class="mock-nav">
+            <div class="mock-logo">
+              <svg viewBox="0 0 280 175" fill="var(--cream)"><polygon points="12,155 35,155 93,25 70,25"/><polygon points="70,25 93,25 115,75 92,75"/><polygon points="128,75 150,25 172,25 145,110 123,110"/></svg>
+              Airvision
+            </div>
+            <div class="mock-links">
+              <div class="mock-dot"></div>
+              <div class="mock-dot"></div>
+              <div class="mock-dot"></div>
+              <div class="mock-dot"></div>
+            </div>
+          </div>
+          <div class="mock-hero">
+            <div class="mock-eyebrow">Buenos Aires · CABA & GBA</div>
+            <div class="mock-title">Una nueva<br><em>perspectiva</em><br>para tus proyectos</div>
+            <div class="mock-sub">Fotografía y video aéreo profesional con drones.</div>
+            <div class="mock-btns">
+              <div class="mock-btn mock-btn-p">Pedir cotización →</div>
+              <div class="mock-btn mock-btn-g">Ver trabajos</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <span class="card-tag">Prototipo B</span>
+        <h2 class="card-name">Premium Navy</h2>
+        <p class="card-desc">Fondo navy oscuro, texto crema, naranja como acento fuerte. Similar al sitio actual pero completamente on-brand con la identidad real.</p>
+        <a href="prototipo-b-navy.html" target="_blank" class="card-cta">Ver prototipo →</a>
+      </div>
+    </div>
+
+    <!-- Prototipo C -->
+    <div class="card">
+      <div class="card-preview preview-c">
+        <div class="preview-mock">
+          <div class="mock-nav">
+            <div class="mock-logo">
+              <svg viewBox="0 0 280 175" fill="var(--cream)"><polygon points="12,155 35,155 93,25 70,25"/><polygon points="70,25 93,25 115,75 92,75"/><polygon points="128,75 150,25 172,25 145,110 123,110"/></svg>
+              Airvision
+            </div>
+            <div class="mock-links">
+              <div class="mock-dot"></div>
+              <div class="mock-dot"></div>
+              <div class="mock-dot"></div>
+              <div class="mock-dot"></div>
+            </div>
+          </div>
+          <div class="mock-hero">
+            <div class="mock-eyebrow">Buenos Aires · CABA & GBA</div>
+            <div class="mock-title">Una nueva<br><em>perspectiva</em><br>para tus proyectos</div>
+            <div class="mock-sub">Fotografía y video aéreo profesional con drones.</div>
+            <div class="mock-btns">
+              <div class="mock-btn mock-btn-p">Pedir cotización →</div>
+              <div class="mock-btn mock-btn-g">Ver trabajos</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <span class="card-tag">Prototipo C</span>
+        <h2 class="card-name">Orange Bold</h2>
+        <p class="card-desc">Hero naranja full-bleed con corte diagonal. Secciones alternando cream/navy. La más audaz y diferenciadora. Servicios en lista estilo editorial.</p>
+        <a href="prototipo-c-bold.html" target="_blank" class="card-cta">Ver prototipo →</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <span>Airvision · Selección de diseño 2025</span>
+  <span>Compartí este link para pedir feedback</span>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,226 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Airvision — Prototipo B: Premium Navy</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Barlow+Condensed:wght@700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:   #1B2240;
+      --cream:  #EDE8DC;
+      --orange: #E13419;
+      --surface: #222A48;
+      --border: rgba(237,232,220,.08);
+      --border-md: rgba(237,232,220,.16);
+      --muted:  rgba(237,232,220,.45);
+    }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'DM Sans',system-ui,sans-serif; background:var(--navy); color:var(--cream); overflow-x:hidden; -webkit-font-smoothing:antialiased; }
+    a { text-decoration:none; color:inherit; }
+
+    /* ── NAV ── */
+    .nav {
+      position:fixed; top:0; left:0; right:0; z-index:50;
+      background:rgba(27,34,64,.85); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--border);
+      display:flex; align-items:center; justify-content:space-between;
+      padding:1.1rem clamp(1.5rem,4vw,3rem);
+    }
+    .brand { display:flex; align-items:center; gap:.65rem; font-weight:400; font-size:1rem; letter-spacing:.06em; text-transform:uppercase; }
+    .brand svg { width:36px; height:auto; }
+    .nav-links { display:flex; gap:2.5rem; list-style:none; font-size:.83rem; }
+    .nav-links a { color:var(--muted); transition:color 180ms; }
+    .nav-links a:hover { color:var(--cream); }
+    @media(max-width:760px){ .nav-links{display:none;} }
+    .nav-cta {
+      display:flex; align-items:center; gap:.5rem;
+      padding:.6rem 1.35rem; border:1px solid var(--border-md); color:var(--cream);
+      font-size:.8rem; font-weight:400; letter-spacing:.04em; border-radius:999px;
+      transition:border-color 200ms,color 200ms;
+    }
+    .nav-cta-dot { width:6px; height:6px; border-radius:50%; background:#22c55e; }
+    .nav-cta:hover { border-color:var(--orange); color:var(--orange); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height:100dvh; position:relative; overflow:hidden;
+      display:grid; grid-template-columns:1.1fr 1fr;
+      align-items:center; gap:4rem;
+      padding:10rem clamp(1.5rem,4vw,3rem) 5rem;
+      border-bottom:1px solid var(--border);
+    }
+    @media(max-width:900px){ .hero{grid-template-columns:1fr; padding-top:8rem;} }
+    .hero-trama {
+      position:absolute; right:0; top:0; width:50%; height:100%;
+      opacity:.04; pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='110' height='110' viewBox='0 0 110 110'%3E%3Cg fill='none' stroke='%23EDE8DC' stroke-width='1.5'%3E%3Cpolygon points='8,85 22,85 55,18 41,18'/%3E%3Cpolygon points='41,18 55,18 66,44 52,44'/%3E%3Cpolygon points='72,44 83,18 97,18 82,60 71,60'/%3E%3C/g%3E%3C/svg%3E");
+      background-size:110px;
+    }
+    .hero-eyebrow {
+      font-size:.7rem; letter-spacing:.26em; text-transform:uppercase;
+      color:var(--muted); margin-bottom:1.75rem;
+      display:flex; align-items:center; gap:.9rem;
+    }
+    .hero-eyebrow::before { content:''; width:28px; height:1px; background:var(--orange); }
+    .hero-title {
+      font-family:'Barlow Condensed',sans-serif; font-weight:900;
+      font-size:clamp(3.5rem,7vw,7rem); line-height:.91;
+      letter-spacing:-.03em; text-transform:uppercase; margin-bottom:1.75rem;
+    }
+    .hero-title em { color:var(--orange); font-style:normal; }
+    .hero-sub { font-size:clamp(.95rem,1.2vw,1.05rem); color:var(--muted); max-width:46ch; line-height:1.7; margin-bottom:2.5rem; }
+    .hero-actions { display:flex; gap:.75rem; flex-wrap:wrap; }
+    .btn { display:inline-flex; align-items:center; gap:.5rem; padding:.95rem 1.6rem; font-size:.84rem; font-weight:500; letter-spacing:.02em; transition:all 200ms; }
+    .btn-primary { background:var(--orange); color:#fff; }
+    .btn-primary:hover { background:#c42e12; }
+    .btn-outline { border:1px solid var(--border-md); color:var(--cream); }
+    .btn-outline:hover { border-color:var(--cream); }
+    .hero-visual { justify-self:end; width:100%; max-width:440px; }
+    .hero-img { width:100%; aspect-ratio:4/5; object-fit:cover; }
+    @media(max-width:900px){ .hero-visual{justify-self:center; max-width:380px;} }
+
+    /* ── STATS ── */
+    .stats {
+      display:grid; grid-template-columns:repeat(4,1fr);
+      border-bottom:1px solid var(--border);
+    }
+    .stat { padding:2.25rem clamp(1.5rem,4vw,3rem); border-right:1px solid var(--border); }
+    .stat:last-child { border-right:none; }
+    .stat-num { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:clamp(2rem,3.5vw,3rem); line-height:1; }
+    .stat-num span { color:var(--orange); }
+    .stat-label { font-size:.7rem; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); margin-top:.4rem; }
+    @media(max-width:640px){ .stats{grid-template-columns:repeat(2,1fr);} .stat:nth-child(2){border-right:none;} }
+
+    /* ── SERVICES ── */
+    .services { padding:clamp(4rem,8vw,7rem) clamp(1.5rem,4vw,3rem); }
+    .section-top {
+      display:flex; align-items:baseline; justify-content:space-between;
+      flex-wrap:wrap; gap:1.5rem;
+      border-top:1px solid var(--border); padding-top:1.25rem; margin-bottom:clamp(2.5rem,5vw,4rem);
+    }
+    .section-label { font-size:.7rem; letter-spacing:.24em; text-transform:uppercase; color:var(--muted); }
+    .section-title { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:clamp(2rem,3.5vw,3.2rem); line-height:.95; letter-spacing:-.02em; text-transform:uppercase; }
+    .services-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); }
+    .service-card {
+      background:var(--surface); padding:2.25rem 2rem 2rem;
+      display:flex; flex-direction:column; transition:background 240ms;
+    }
+    .service-card:hover { background:#2a3358; }
+    .service-num { font-size:.68rem; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); margin-bottom:1.75rem; }
+    .service-img { width:100%; aspect-ratio:4/3; object-fit:cover; margin-bottom:1.5rem; background:var(--border); overflow:hidden; }
+    .service-img img { width:100%; height:100%; object-fit:cover; display:block; }
+    .service-name { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.75rem; line-height:1; letter-spacing:-.01em; text-transform:uppercase; margin-bottom:.65rem; }
+    .service-desc { font-size:.88rem; line-height:1.65; color:var(--muted); flex:1; margin-bottom:1.5rem; }
+    .service-cta { font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; color:var(--orange); }
+    @media(max-width:800px){ .services-grid{grid-template-columns:1fr;} }
+
+    /* ── ORANGE BANNER ── */
+    .banner {
+      background:var(--orange); color:#fff;
+      padding:5rem clamp(1.5rem,4vw,3rem);
+      display:grid; grid-template-columns:1fr auto; align-items:center; gap:3rem;
+    }
+    @media(max-width:760px){ .banner{grid-template-columns:1fr;} }
+    .banner-title { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:clamp(2.5rem,4.5vw,4.5rem); line-height:.92; letter-spacing:-.02em; text-transform:uppercase; }
+    .btn-white { display:inline-flex; align-items:center; gap:.5rem; padding:1rem 1.75rem; background:#fff; color:var(--orange); font-size:.84rem; font-weight:700; white-space:nowrap; transition:background 200ms,color 200ms; }
+    .btn-white:hover { background:var(--navy); color:#fff; }
+
+    /* ── FOOTER ── */
+    footer { border-top:1px solid var(--border); padding:2rem clamp(1.5rem,4vw,3rem); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; font-size:.78rem; color:var(--muted); }
+
+    /* ── BADGE ── */
+    .badge { position:fixed; bottom:1.5rem; left:1.5rem; z-index:100; background:var(--orange); color:#fff; padding:.45rem 1rem; font-size:.68rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
+  </style>
+</head>
+<body>
+
+<div class="badge">Prototipo B — Premium Navy</div>
+
+<nav class="nav">
+  <a href="#" class="brand">
+    <svg viewBox="0 0 280 175" fill="var(--cream)" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="12,155 35,155 93,25 70,25"/>
+      <polygon points="70,25 93,25 115,75 92,75"/>
+      <polygon points="128,75 150,25 172,25 145,110 123,110"/>
+    </svg>
+    Airvision
+  </a>
+  <ul class="nav-links">
+    <li><a href="#">Servicios</a></li>
+    <li><a href="#">Trabajos</a></li>
+    <li><a href="#">Sobre</a></li>
+    <li><a href="#">Contacto</a></li>
+  </ul>
+  <a href="#" class="nav-cta"><span class="nav-cta-dot"></span> Tomando proyectos</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-trama"></div>
+  <div>
+    <p class="hero-eyebrow">Buenos Aires · CABA &amp; GBA · 34°36′S</p>
+    <h1 class="hero-title">Una nueva<br><em>perspectiva</em><br>para tus<br>proyectos</h1>
+    <p class="hero-sub">Fotografía y video aéreo profesional con drones. Construcción, inmobiliaria y deportes — entregando material crudo o editado, según lo que tu proyecto necesite.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn btn-primary">Pedir cotización →</a>
+      <a href="#" class="btn btn-outline">Ver trabajos</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <img class="hero-img" src="../img/01-hero.webp" alt="Drone preparado para vuelo">
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat"><div class="stat-num">02<span>+</span></div><div class="stat-label">Años en operación</div></div>
+  <div class="stat"><div class="stat-num">3<span>—</span>7</div><div class="stat-label">Días de entrega</div></div>
+  <div class="stat"><div class="stat-num">CABA<span>·</span>GBA</div><div class="stat-label">Cobertura</div></div>
+  <div class="stat"><div class="stat-num">4K<span>↑</span></div><div class="stat-label">Resolución</div></div>
+</div>
+
+<section class="services">
+  <div class="section-top">
+    <span class="section-label">Servicios</span>
+    <h2 class="section-title">Disciplinas en las<br>que volamos</h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-num">01 / Construcción</div>
+      <div class="service-img"><img src="../img/02-construccion.webp" alt="Construcción"></div>
+      <h3 class="service-name">Construcción<br>y obra</h3>
+      <p class="service-desc">Avance de obra desde el aire, inspecciones de techos, fachadas y zonas de difícil acceso.</p>
+      <span class="service-cta">Consultar →</span>
+    </div>
+    <div class="service-card">
+      <div class="service-num">02 / Inmobiliaria</div>
+      <div class="service-img"><img src="../img/03-inmobiliaria.webp" alt="Inmobiliaria"></div>
+      <h3 class="service-name">Inmobiliaria</h3>
+      <p class="service-desc">Filmación y fotografía aérea de propiedades. Material que diferencia un listado y vende más rápido.</p>
+      <span class="service-cta">Consultar →</span>
+    </div>
+    <div class="service-card">
+      <div class="service-num">03 / Deportes</div>
+      <div class="service-img"><img src="../img/04-deportes.webp" alt="Deportes"></div>
+      <h3 class="service-name">Deportes<br>y aventura</h3>
+      <p class="service-desc">Filmación de eventos deportivos, motorsport y deportes outdoor. Tomas dinámicas con seguimiento aéreo.</p>
+      <span class="service-cta">Consultar →</span>
+    </div>
+  </div>
+</section>
+
+<section class="banner">
+  <h2 class="banner-title">Contame qué<br>querés volar.</h2>
+  <a href="#" class="btn-white">Pedir cotización →</a>
+</section>
+
+<footer>
+  <div class="brand">
+    <svg viewBox="0 0 280 175" fill="var(--cream)" width="26"><polygon points="12,155 35,155 93,25 70,25"/><polygon points="70,25 93,25 115,75 92,75"/><polygon points="128,75 150,25 172,25 145,110 123,110"/></svg>
+    Airvision
+  </div>
+  <span>© 2025 Airvision · Buenos Aires, Argentina</span>
+</footer>
+
+</body>
+</html>
