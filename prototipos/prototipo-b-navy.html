@@ -3,224 +3,2140 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Airvision — Prototipo B: Premium Navy</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Barlow+Condensed:wght@700;800;900&display=swap" rel="stylesheet">
+  <title>Airvision · Prototipo B — Premium Navy Fotografía y video aéreo profesional con drones · Buenos Aires</title>
+  <meta name="description" content="Filmación y fotografía aérea con drones en CABA y GBA. Construcción, inmobiliaria y deportes. Una nueva perspectiva para tus proyectos.">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Air Vision — Fotografía y video aéreo con drones">
+  <meta property="og:description" content="Una nueva perspectiva para tus proyectos. CABA y GBA.">
+  <meta property="og:locale" content="es_AR">
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230B0F17'/%3E%3Cpath d='M6 16h20M16 6v20' stroke='%230EA5E9' stroke-width='1.5' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='16' r='3' fill='none' stroke='%230EA5E9' stroke-width='1.5'/%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --navy:   #1B2240;
-      --cream:  #EDE8DC;
-      --orange: #E13419;
-      --surface: #222A48;
-      --border: rgba(237,232,220,.08);
-      --border-md: rgba(237,232,220,.16);
-      --muted:  rgba(237,232,220,.45);
-    }
-    * { box-sizing:border-box; margin:0; padding:0; }
-    html { scroll-behavior:smooth; }
-    body { font-family:'DM Sans',system-ui,sans-serif; background:var(--navy); color:var(--cream); overflow-x:hidden; -webkit-font-smoothing:antialiased; }
-    a { text-decoration:none; color:inherit; }
+      --bg: #0B0F17;
+      --surface: #11161F;
+      --surface-2: #161C26;
+      --border: rgba(255, 255, 255, 0.06);
+      --border-strong: rgba(255, 255, 255, 0.12);
+      --text: #ECEFF4;
+      --text-muted: #8B95A6;
+      --text-faint: #475569;
+      --primary: #0EA5E9;
+      --primary-dark: #0369A1;
 
-    /* ── NAV ── */
+      --font-display: 'Barlow Condensed', system-ui, sans-serif;
+      --font-body: 'Sora', system-ui, sans-serif;
+
+      --text-hero: clamp(3rem, 8vw, 6.25rem);
+      --text-h1: clamp(2rem, 5vw, 3.75rem);
+      --text-h2: clamp(1.6rem, 3vw, 2.4rem);
+      --text-h3: clamp(1.2rem, 2vw, 1.5rem);
+      --text-body: 1rem;
+      --text-sm: 0.875rem;
+      --text-xs: 0.75rem;
+
+      --leading-tight: 1.04;
+      --leading-snug: 1.2;
+      --leading-body: 1.65;
+      --tracking-hero: -0.03em;
+      --tracking-tight: -0.02em;
+      --tracking-label: 0.18em;
+
+      --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+
+      --max: 1280px;
+      --pad-x: clamp(1.5rem, 5vw, 3rem);
+      --gap: clamp(1.5rem, 3vw, 3rem);
+
+      --wgp-primary: var(--primary);
+      --wgp-primary-dark: var(--primary-dark);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      font-size: var(--text-body);
+      line-height: var(--leading-body);
+      font-weight: 400;
+      overflow-x: hidden;
+      min-height: 100dvh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    img, svg { display: block; max-width: 100%; }
+
+    a { color: inherit; text-decoration: none; }
+
+    button { font: inherit; border: none; background: none; color: inherit; cursor: pointer; }
+
+    ::selection { background: var(--primary); color: var(--bg); }
+
+    /* ─── TYPO HELPERS ────────────────────────── */
+    .label {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: var(--text-xs);
+      letter-spacing: var(--tracking-label);
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ─── LAYOUT ──────────────────────────────── */
+    .container {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--pad-x);
+      position: relative;
+    }
+
+    section { position: relative; padding: clamp(4.5rem, 9vw, 8rem) 0; }
+
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin-bottom: 1.5rem;
+    }
+    .section-eyebrow::before {
+      content: '';
+      width: 28px;
+      height: 1px;
+      background: var(--primary);
+    }
+
+    /* ─── IMAGE SLOTS ─────────────────────────── */
+    .image-slot {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .image-slot img,
+    .image-slot video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Cuando está vacío muestra una guía visual sobria. Se oculta solo si hay <img> o <video> dentro. */
+    .image-slot:not(:has(img)):not(:has(video))::before {
+      content: 'IMAGEN';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      color: var(--text-faint);
+    }
+
+    .image-slot:not(:has(img)):not(:has(video))::after {
+      content: '';
+      position: absolute;
+      inset: 12px;
+      border: 1px dashed rgba(255, 255, 255, 0.04);
+      pointer-events: none;
+    }
+
+    .ratio-portrait { aspect-ratio: 4 / 5; }
+    .ratio-landscape { aspect-ratio: 16 / 10; }
+    .ratio-square { aspect-ratio: 1 / 1; }
+    .ratio-3-2 { aspect-ratio: 3 / 2; }
+    .ratio-2-3 { aspect-ratio: 2 / 3; }
+
+    /* ─── NAV ─────────────────────────────────── */
     .nav {
-      position:fixed; top:0; left:0; right:0; z-index:50;
-      background:rgba(27,34,64,.85); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
-      border-bottom:1px solid var(--border);
-      display:flex; align-items:center; justify-content:space-between;
-      padding:1.1rem clamp(1.5rem,4vw,3rem);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      backdrop-filter: blur(12px);
+      background: rgba(11, 15, 23, 0.65);
+      border-bottom: 1px solid transparent;
+      transition: border-color 240ms var(--ease-out), background 240ms var(--ease-out);
     }
-    .brand { display:flex; align-items:center; gap:.65rem; font-weight:400; font-size:1rem; letter-spacing:.06em; text-transform:uppercase; }
-    .brand svg { width:36px; height:auto; }
-    .nav-links { display:flex; gap:2.5rem; list-style:none; font-size:.83rem; }
-    .nav-links a { color:var(--muted); transition:color 180ms; }
-    .nav-links a:hover { color:var(--cream); }
-    @media(max-width:760px){ .nav-links{display:none;} }
+    .nav.scrolled {
+      border-bottom-color: var(--border);
+      background: rgba(11, 15, 23, 0.9);
+    }
+
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 1rem var(--pad-x);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.35rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .brand-mark {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+    .brand-mark path,
+    .brand-mark circle { stroke: var(--primary); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      transition: color 200ms var(--ease-out);
+    }
+    @media (hover: hover) {
+      .nav-links a:hover { color: var(--text); }
+    }
+    @media (max-width: 720px) {
+      .nav-links { display: none; }
+    }
+
     .nav-cta {
-      display:flex; align-items:center; gap:.5rem;
-      padding:.6rem 1.35rem; border:1px solid var(--border-md); color:var(--cream);
-      font-size:.8rem; font-weight:400; letter-spacing:.04em; border-radius:999px;
-      transition:border-color 200ms,color 200ms;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 1.05rem;
+      border: 1px solid var(--border-strong);
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+      transition: border-color 220ms var(--ease-out), color 220ms var(--ease-out);
     }
-    .nav-cta-dot { width:6px; height:6px; border-radius:50%; background:#22c55e; }
-    .nav-cta:hover { border-color:var(--orange); color:var(--orange); }
+    @media (max-width: 540px) {
+      .nav-cta { display: none; }
+    }
+    @media (hover: hover) {
+      .nav-cta:hover { border-color: var(--primary); color: var(--primary); }
+    }
+    .nav-cta-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #22c55e;
+    }
 
-    /* ── HERO ── */
+    /* ─── HERO ────────────────────────────────── */
     .hero {
-      min-height:100dvh; position:relative; overflow:hidden;
-      display:grid; grid-template-columns:1.1fr 1fr;
-      align-items:center; gap:4rem;
-      padding:10rem clamp(1.5rem,4vw,3rem) 5rem;
-      border-bottom:1px solid var(--border);
+      min-height: calc(100dvh - 1px);
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      align-items: center;
+      gap: clamp(2rem, 5vw, 4.5rem);
+      padding-top: 9rem;
+      padding-bottom: 5rem;
     }
-    @media(max-width:900px){ .hero{grid-template-columns:1fr; padding-top:8rem;} }
-    .hero-trama {
-      position:absolute; right:0; top:0; width:50%; height:100%;
-      opacity:.04; pointer-events:none;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='110' height='110' viewBox='0 0 110 110'%3E%3Cg fill='none' stroke='%23EDE8DC' stroke-width='1.5'%3E%3Cpolygon points='8,85 22,85 55,18 41,18'/%3E%3Cpolygon points='41,18 55,18 66,44 52,44'/%3E%3Cpolygon points='72,44 83,18 97,18 82,60 71,60'/%3E%3C/g%3E%3C/svg%3E");
-      background-size:110px;
+
+    @media (max-width: 960px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 8rem;
+        padding-bottom: 4rem;
+      }
     }
-    .hero-eyebrow {
-      font-size:.7rem; letter-spacing:.26em; text-transform:uppercase;
-      color:var(--muted); margin-bottom:1.75rem;
-      display:flex; align-items:center; gap:.9rem;
+
+    .hero-text { max-width: 680px; }
+
+    .hero-coords {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: var(--text-faint);
+      margin-bottom: 2rem;
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
     }
-    .hero-eyebrow::before { content:''; width:28px; height:1px; background:var(--orange); }
+    .hero-coords span::before {
+      content: '◆ ';
+      color: var(--primary);
+      margin-right: 0.4rem;
+      opacity: 0.7;
+    }
+
     .hero-title {
-      font-family:'Barlow Condensed',sans-serif; font-weight:900;
-      font-size:clamp(3.5rem,7vw,7rem); line-height:.91;
-      letter-spacing:-.03em; text-transform:uppercase; margin-bottom:1.75rem;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: var(--text-hero);
+      line-height: 0.95;
+      letter-spacing: var(--tracking-hero);
+      text-transform: uppercase;
+      text-wrap: balance;
+      margin-bottom: 1.5rem;
     }
-    .hero-title em { color:var(--orange); font-style:normal; }
-    .hero-sub { font-size:clamp(.95rem,1.2vw,1.05rem); color:var(--muted); max-width:46ch; line-height:1.7; margin-bottom:2.5rem; }
-    .hero-actions { display:flex; gap:.75rem; flex-wrap:wrap; }
-    .btn { display:inline-flex; align-items:center; gap:.5rem; padding:.95rem 1.6rem; font-size:.84rem; font-weight:500; letter-spacing:.02em; transition:all 200ms; }
-    .btn-primary { background:var(--orange); color:#fff; }
-    .btn-primary:hover { background:#c42e12; }
-    .btn-outline { border:1px solid var(--border-md); color:var(--cream); }
-    .btn-outline:hover { border-color:var(--cream); }
-    .hero-visual { justify-self:end; width:100%; max-width:440px; }
-    .hero-img { width:100%; aspect-ratio:4/5; object-fit:cover; }
-    @media(max-width:900px){ .hero-visual{justify-self:center; max-width:380px;} }
+    .hero-title em {
+      font-style: normal;
+      color: var(--primary);
+      font-weight: 900;
+    }
 
-    /* ── STATS ── */
+    .hero-sub {
+      font-size: clamp(1rem, 1.3vw, 1.1rem);
+      color: var(--text-muted);
+      max-width: 520px;
+      line-height: 1.6;
+      margin-bottom: 2.25rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 0.85rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.95rem 1.5rem;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 0.88rem;
+      letter-spacing: 0.02em;
+      border-radius: 3px;
+      transition: background 200ms var(--ease-out), border-color 200ms var(--ease-out), color 200ms var(--ease-out);
+      cursor: pointer;
+    }
+    .btn:active { transform: scale(0.98); }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #06121E;
+      font-weight: 600;
+    }
+    @media (hover: hover) {
+      .btn-primary:hover { background: #38BDF8; }
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border-strong);
+    }
+    @media (hover: hover) {
+      .btn-ghost:hover { border-color: var(--primary); color: var(--primary); }
+    }
+
+    .btn-arrow {
+      display: inline-block;
+      transition: transform 200ms var(--ease-out);
+    }
+    @media (hover: hover) {
+      .btn:hover .btn-arrow { transform: translateX(3px); }
+    }
+
+    /* Hero image slot */
+    .hero-visual {
+      justify-self: end;
+      width: 100%;
+      max-width: 460px;
+    }
+    @media (max-width: 960px) {
+      .hero-visual { justify-self: center; max-width: 480px; margin-top: 1rem; }
+    }
+
+    /* ─── STATS ───────────────────────────────── */
     .stats {
-      display:grid; grid-template-columns:repeat(4,1fr);
-      border-bottom:1px solid var(--border);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 2.75rem 0;
     }
-    .stat { padding:2.25rem clamp(1.5rem,4vw,3rem); border-right:1px solid var(--border); }
-    .stat:last-child { border-right:none; }
-    .stat-num { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:clamp(2rem,3.5vw,3rem); line-height:1; }
-    .stat-num span { color:var(--orange); }
-    .stat-label { font-size:.7rem; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); margin-top:.4rem; }
-    @media(max-width:640px){ .stats{grid-template-columns:repeat(2,1fr);} .stat:nth-child(2){border-right:none;} }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 2.5rem;
+    }
+    .stat-block { display: flex; flex-direction: column; gap: 0.4rem; }
+    .stat-num {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(2.2rem, 4vw, 3.25rem);
+      line-height: 1;
+      letter-spacing: var(--tracking-tight);
+    }
+    .stat-num span { color: var(--primary); font-weight: 900; }
+    .stat-label {
+      font-size: var(--text-xs);
+      color: var(--text-muted);
+      letter-spacing: var(--tracking-label);
+      text-transform: uppercase;
+    }
 
-    /* ── SERVICES ── */
-    .services { padding:clamp(4rem,8vw,7rem) clamp(1.5rem,4vw,3rem); }
-    .section-top {
-      display:flex; align-items:baseline; justify-content:space-between;
-      flex-wrap:wrap; gap:1.5rem;
-      border-top:1px solid var(--border); padding-top:1.25rem; margin-bottom:clamp(2.5rem,5vw,4rem);
+    /* ─── SERVICIOS ───────────────────────────── */
+    .services-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap);
+      align-items: end;
+      margin-bottom: 3rem;
     }
-    .section-label { font-size:.7rem; letter-spacing:.24em; text-transform:uppercase; color:var(--muted); }
-    .section-title { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:clamp(2rem,3.5vw,3.2rem); line-height:.95; letter-spacing:-.02em; text-transform:uppercase; }
-    .services-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); }
+    @media (max-width: 800px) {
+      .services-header { grid-template-columns: 1fr; gap: 1.25rem; }
+    }
+
+    .h-section {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: var(--text-h1);
+      line-height: 0.98;
+      letter-spacing: var(--tracking-hero);
+      text-transform: uppercase;
+      text-wrap: balance;
+    }
+    .h-section strong { color: var(--primary); font-weight: 900; }
+
+    .section-intro {
+      color: var(--text-muted);
+      max-width: 460px;
+      line-height: 1.6;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    @media (max-width: 900px) {
+      .services-grid { grid-template-columns: 1fr; }
+    }
+
     .service-card {
-      background:var(--surface); padding:2.25rem 2rem 2rem;
-      display:flex; flex-direction:column; transition:background 240ms;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 280ms var(--ease-out);
     }
-    .service-card:hover { background:#2a3358; }
-    .service-num { font-size:.68rem; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); margin-bottom:1.75rem; }
-    .service-img { width:100%; aspect-ratio:4/3; object-fit:cover; margin-bottom:1.5rem; background:var(--border); overflow:hidden; }
-    .service-img img { width:100%; height:100%; object-fit:cover; display:block; }
-    .service-name { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.75rem; line-height:1; letter-spacing:-.01em; text-transform:uppercase; margin-bottom:.65rem; }
-    .service-desc { font-size:.88rem; line-height:1.65; color:var(--muted); flex:1; margin-bottom:1.5rem; }
-    .service-cta { font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; color:var(--orange); }
-    @media(max-width:800px){ .services-grid{grid-template-columns:1fr;} }
-
-    /* ── ORANGE BANNER ── */
-    .banner {
-      background:var(--orange); color:#fff;
-      padding:5rem clamp(1.5rem,4vw,3rem);
-      display:grid; grid-template-columns:1fr auto; align-items:center; gap:3rem;
+    @media (hover: hover) {
+      .service-card:hover { border-color: var(--border-strong); }
+      .service-card:hover .service-arrow { transform: translateX(3px); color: var(--primary); }
     }
-    @media(max-width:760px){ .banner{grid-template-columns:1fr;} }
-    .banner-title { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:clamp(2.5rem,4.5vw,4.5rem); line-height:.92; letter-spacing:-.02em; text-transform:uppercase; }
-    .btn-white { display:inline-flex; align-items:center; gap:.5rem; padding:1rem 1.75rem; background:#fff; color:var(--orange); font-size:.84rem; font-weight:700; white-space:nowrap; transition:background 200ms,color 200ms; }
-    .btn-white:hover { background:var(--navy); color:#fff; }
 
-    /* ── FOOTER ── */
-    footer { border-top:1px solid var(--border); padding:2rem clamp(1.5rem,4vw,3rem); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; font-size:.78rem; color:var(--muted); }
+    .service-image { aspect-ratio: 4 / 3; }
+    .service-image .image-slot { height: 100%; border: none; border-radius: 0; border-bottom: 1px solid var(--border); }
 
-    /* ── BADGE ── */
-    .badge { position:fixed; bottom:1.5rem; left:1.5rem; z-index:100; background:var(--orange); color:#fff; padding:.45rem 1rem; font-size:.68rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
+    .service-body {
+      padding: 1.75rem 1.75rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .service-num {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      color: var(--text-faint);
+      margin-bottom: 0.85rem;
+      text-transform: uppercase;
+    }
+
+    .service-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.65rem;
+      line-height: 1.05;
+      letter-spacing: var(--tracking-tight);
+      text-transform: uppercase;
+      margin-bottom: 0.7rem;
+    }
+
+    .service-desc {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      flex: 1;
+    }
+
+    .service-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+    .service-arrow { transition: transform 220ms var(--ease-out), color 220ms var(--ease-out); }
+
+    /* ─── TRABAJOS / PORTFOLIO ────────────────── */
+    .works-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap);
+      align-items: end;
+      margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+    }
+    @media (max-width: 800px) {
+      .works-header { grid-template-columns: 1fr; }
+    }
+
+    /* ─── Works carousel ──────────────────────── */
+    .works-carousel {
+      position: relative;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .works-carousel__viewport {
+      overflow: hidden;
+      border-radius: 4px;
+      position: relative;
+    }
+
+    .works-carousel__track {
+      display: flex;
+      transition: transform 650ms cubic-bezier(0.23, 1, 0.32, 1);
+      will-change: transform;
+    }
+
+    .works-carousel__slide {
+      flex: 0 0 100%;
+      min-width: 0;
+      position: relative;
+    }
+
+    .works-carousel__slide .image-slot {
+      aspect-ratio: 16 / 9;
+      width: 100%;
+      border: none;
+      border-radius: 0;
+    }
+
+    .works-carousel__slide img,
+    .works-carousel__slide video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Progress bar */
+    .works-carousel__progress {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.07);
+      z-index: 4;
+      border-radius: 0 0 0 0;
+      overflow: hidden;
+    }
+    .works-carousel__progress-bar {
+      height: 100%;
+      background: var(--primary);
+      width: 0%;
+      border-radius: 0 999px 999px 0;
+      transition: none;
+    }
+    .works-carousel__progress-bar.is-running {
+      transition: width linear;
+    }
+
+    /* Caption overlay */
+    .works-carousel__caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 4rem 1.75rem 1.4rem;
+      background: linear-gradient(to top, rgba(11,15,23,0.92) 0%, rgba(11,15,23,0.35) 60%, transparent 100%);
+      z-index: 2;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .works-carousel__caption-tag {
+      font-size: 0.62rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--primary);
+      font-weight: 600;
+      font-family: var(--font-body);
+      transform: translateY(6px);
+      opacity: 0;
+      transition: transform 380ms var(--ease-out), opacity 380ms var(--ease-out);
+    }
+    .works-carousel__caption-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(1.1rem, 2.2vw, 1.45rem);
+      letter-spacing: var(--tracking-tight);
+      text-transform: uppercase;
+      color: var(--text);
+      transform: translateY(8px);
+      opacity: 0;
+      transition: transform 480ms 50ms var(--ease-out), opacity 480ms 50ms var(--ease-out);
+    }
+    .works-carousel__caption.is-visible .works-carousel__caption-tag,
+    .works-carousel__caption.is-visible .works-carousel__caption-title {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* Nav buttons */
+    .works-carousel__nav {
+      position: absolute;
+      top: calc(50% - 22px);
+      transform: translateY(-50%);
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: rgba(11, 15, 23, 0.55);
+      border: 1px solid var(--border-strong);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: background 220ms var(--ease-out), border-color 220ms var(--ease-out), color 220ms var(--ease-out);
+    }
+    @media (hover: hover) {
+      .works-carousel__nav:hover {
+        background: var(--primary);
+        border-color: var(--primary);
+        color: #06121E;
+      }
+    }
+    .works-carousel__nav:active { transform: translateY(-50%) scale(0.95); }
+    .works-carousel__nav--prev { left: 14px; }
+    .works-carousel__nav--next { right: 14px; }
+    .works-carousel__nav svg { width: 18px; height: 18px; stroke-width: 2; }
+
+    /* ── Mobile carousel overrides (≤ 640px) ──── */
+    @media (max-width: 640px) {
+
+      /* Imagen más alta: 4:3 en vez de 16:9 */
+      .works-carousel__slide .image-slot {
+        aspect-ratio: 4 / 3;
+      }
+
+      /* Ocultar caption overlay — tapaba la imagen */
+      .works-carousel__caption { display: none; }
+
+      /* Ocultar contador y expand hint */
+      .works-carousel__counter   { display: none; }
+      .works-carousel__expand-hint { display: none; }
+
+      /* Flechas: salen del viewport, van a una fila debajo de la imagen */
+      .works-carousel {
+        display: grid;
+        grid-template-areas:
+          "prog  prog  prog"
+          "view  view  view"
+          "prev  dots  next";
+        grid-template-columns: 48px 1fr 48px;
+        grid-template-rows: 2px 1fr auto;
+        gap: 0;
+      }
+      .works-carousel__progress  { grid-area: prog; }
+      .works-carousel__viewport  { grid-area: view; cursor: zoom-in; }
+      .works-carousel__thumbs    { grid-area: dots; align-self: center; margin-top: 0.75rem; }
+
+      .works-carousel__nav {
+        position: static;
+        transform: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-top: 0.75rem;
+        align-self: start;
+        background: var(--surface);
+        border-color: var(--border-strong);
+      }
+      .works-carousel__nav:active { transform: scale(0.93); }
+      .works-carousel__nav--prev { grid-area: prev; justify-self: center; }
+      .works-carousel__nav--next { grid-area: next; justify-self: center; }
+
+      /* Thumbnails más grandes en mobile */
+      .works-carousel__thumb {
+        width: clamp(48px, 13vw, 72px);
+      }
+    }
+
+    /* Counter badge */
+    .works-carousel__counter {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 3;
+      padding: 0.35rem 0.7rem;
+      background: rgba(11, 15, 23, 0.6);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--border-strong);
+      border-radius: 999px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      color: var(--text);
+    }
+    .works-carousel__counter .total { color: var(--text-faint); }
+
+    /* Thumbnail strip */
+    .works-carousel__thumbs {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      justify-content: center;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding-bottom: 2px;
+    }
+    .works-carousel__thumbs::-webkit-scrollbar { display: none; }
+
+    .works-carousel__thumb {
+      flex: 0 0 auto;
+      width: clamp(56px, 9vw, 90px);
+      aspect-ratio: 16 / 9;
+      border-radius: 3px;
+      overflow: hidden;
+      border: 2px solid transparent;
+      cursor: pointer;
+      opacity: 0.42;
+      transition: border-color 220ms var(--ease-out), opacity 220ms var(--ease-out);
+      background: var(--surface);
+      padding: 0;
+    }
+    .works-carousel__thumb--active {
+      border-color: var(--primary);
+      opacity: 1;
+    }
+    @media (hover: hover) {
+      .works-carousel__thumb:hover:not(.works-carousel__thumb--active) {
+        opacity: 0.72;
+        border-color: var(--border-strong);
+      }
+    }
+    .works-carousel__thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .works-carousel__thumb-play {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface-2);
+      color: var(--text-muted);
+    }
+    .works-carousel__thumb-play svg { width: 18px; height: 18px; }
+
+    /* ─── Lightbox ─────────────────────────────── */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(5, 8, 14, 0.96);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 260ms var(--ease-out);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .lightbox.is-open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .lightbox__inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem;
+    }
+    [data-lightbox-content] {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: calc(100vw - 9rem);
+      max-height: calc(100dvh - 6rem);
+    }
+    [data-lightbox-content] img,
+    [data-lightbox-content] video {
+      max-width: 100%;
+      max-height: calc(100dvh - 6rem);
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 3px;
+      transform: scale(0.94);
+      opacity: 0;
+      transition: transform 340ms var(--ease-out), opacity 340ms var(--ease-out);
+    }
+    .lightbox.is-open [data-lightbox-content] img,
+    .lightbox.is-open [data-lightbox-content] video {
+      transform: scale(1);
+      opacity: 1;
+    }
+    .lightbox__close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 2;
+      transition: background 200ms var(--ease-out), border-color 200ms var(--ease-out), color 200ms var(--ease-out);
+    }
+    @media (hover: hover) {
+      .lightbox__close:hover { background: var(--primary); border-color: var(--primary); color: #06121E; }
+    }
+    .lightbox__close svg { width: 18px; height: 18px; stroke-width: 2; }
+
+    .lightbox__nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 2;
+      transition: background 200ms var(--ease-out), border-color 200ms var(--ease-out), color 200ms var(--ease-out);
+    }
+    @media (hover: hover) {
+      .lightbox__nav:hover { background: var(--primary); border-color: var(--primary); color: #06121E; }
+    }
+    .lightbox__nav:active { transform: translateY(-50%) scale(0.94); }
+    .lightbox__nav--prev { left: 1rem; }
+    .lightbox__nav--next { right: 1rem; }
+    .lightbox__nav svg { width: 20px; height: 20px; stroke-width: 2; }
+
+    .lightbox__counter {
+      position: absolute;
+      bottom: 1.25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    /* Expand hint overlay on carousel slide */
+    .works-carousel__viewport { cursor: zoom-in; }
+    .works-carousel__expand-hint {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      z-index: 3;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(11, 15, 23, 0.6);
+      border: 1px solid var(--border-strong);
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      opacity: 0;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: opacity 200ms var(--ease-out);
+    }
+    .works-carousel__viewport:hover .works-carousel__expand-hint { opacity: 1; }
+    @media (hover: none) { .works-carousel__expand-hint { opacity: 1; } }
+    .works-carousel__expand-hint svg { width: 15px; height: 15px; stroke-width: 1.8; }
+
+    @media (max-width: 600px) {
+      .lightbox__inner { padding: 4rem 0.5rem 3rem; }
+      .lightbox__nav--prev { left: 0.4rem; }
+      .lightbox__nav--next { right: 0.4rem; }
+      [data-lightbox-content] { max-width: calc(100vw - 5rem); }
+    }
+
+    /* ─── ABOUT ───────────────────────────────── */
+    .about {
+      max-width: 720px;
+    }
+
+    .about-body {
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 60ch;
+      font-size: 1rem;
+      margin-bottom: 2rem;
+      margin-top: 1.25rem;
+    }
+    .about-body p + p { margin-top: 1rem; }
+
+    .credentials {
+      list-style: none;
+      border-top: 1px solid var(--border);
+    }
+    .credentials li {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 1.5rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: baseline;
+    }
+    .credentials .key {
+      font-size: 0.68rem;
+      letter-spacing: var(--tracking-label);
+      color: var(--text-faint);
+      text-transform: uppercase;
+    }
+    .credentials .val {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+
+    /* ─── FAQ ─────────────────────────────────── */
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.8fr;
+      gap: clamp(2rem, 5vw, 4rem);
+    }
+    @media (max-width: 900px) {
+      .faq-grid { grid-template-columns: 1fr; }
+    }
+
+    .faq-list { display: flex; flex-direction: column; }
+    .faq-item {
+      border-top: 1px solid var(--border);
+      padding: 1.85rem 0;
+      display: grid;
+      grid-template-columns: 50px 1fr;
+      gap: 1.5rem;
+    }
+    .faq-item:last-child { border-bottom: 1px solid var(--border); }
+
+    .faq-num {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.78rem;
+      color: var(--text-faint);
+      letter-spacing: 0.18em;
+      padding-top: 0.35rem;
+    }
+
+    .faq-q {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(1.2rem, 1.8vw, 1.4rem);
+      line-height: 1.18;
+      letter-spacing: var(--tracking-tight);
+      text-transform: uppercase;
+      margin-bottom: 0.55rem;
+    }
+
+    .faq-a { color: var(--text-muted); line-height: 1.65; max-width: 65ch; font-size: 0.95rem; }
+
+    /* ─── CONTACTO ────────────────────────────── */
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2.5rem, 6vw, 5rem);
+      align-items: start;
+    }
+    @media (max-width: 880px) {
+      .contact-wrap { grid-template-columns: 1fr; }
+    }
+
+    .contact-lead {
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin: 1.25rem 0 2rem;
+      max-width: 50ch;
+    }
+
+    .contact-channels {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+    .contact-channel {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      background: var(--surface);
+      transition: border-color 220ms var(--ease-out);
+    }
+    @media (hover: hover) {
+      .contact-channel:hover { border-color: var(--primary); }
+    }
+    .channel-icon {
+      width: 24px;
+      height: 24px;
+      stroke: var(--primary);
+      stroke-width: 1.5;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+    .channel-meta { display: flex; flex-direction: column; }
+    .channel-label {
+      font-size: 0.68rem;
+      color: var(--text-faint);
+      letter-spacing: var(--tracking-label);
+      text-transform: uppercase;
+      margin-bottom: 0.15rem;
+    }
+    .channel-val {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    /* ─── FORM ────────────────────────────────── */
+    .form-card {
+      padding: clamp(1.5rem, 3vw, 2.25rem);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+
+    .form-eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: var(--tracking-label);
+      color: var(--text-faint);
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+    .form-h {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.35rem;
+      letter-spacing: var(--tracking-tight);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 580px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    .field { margin-bottom: 0.95rem; }
+    .field label {
+      display: block;
+      font-size: 0.68rem;
+      letter-spacing: var(--tracking-label);
+      color: var(--text-faint);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .field input,
+    .field textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      background: var(--bg);
+      border: 1px solid var(--border-strong);
+      border-radius: 3px;
+      color: var(--text);
+      font: inherit;
+      font-size: 0.95rem;
+      transition: border-color 200ms var(--ease-out);
+    }
+    .field input:focus,
+    .field textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    .field textarea { resize: vertical; min-height: 100px; }
+
+    .form-submit {
+      width: 100%;
+      padding: 1rem;
+      background: var(--primary);
+      color: #06121E;
+      font-weight: 600;
+      font-size: 0.88rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border-radius: 3px;
+      transition: background 200ms var(--ease-out);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .form-submit:hover { background: #38BDF8; }
+    .form-submit:active { transform: scale(0.99); }
+
+    .form-note {
+      font-size: 0.74rem;
+      color: var(--text-faint);
+      margin-top: 0.85rem;
+      line-height: 1.5;
+    }
+
+    /* ─── FOOTER ──────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 0 2rem;
+      margin-top: 4rem;
+    }
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+    @media (max-width: 720px) {
+      .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+    }
+    .footer-brand-text {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      max-width: 38ch;
+      line-height: 1.6;
+      margin-top: 1rem;
+    }
+    .footer-col h5 {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      letter-spacing: var(--tracking-label);
+      color: var(--text);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .footer-col a {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      transition: color 200ms var(--ease-out);
+    }
+    @media (hover: hover) {
+      .footer-col a:hover { color: var(--primary); }
+    }
+    .footer-bottom {
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.78rem;
+      color: var(--text-faint);
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── REVEALS ─────────────────────────────── */
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out);
+    }
+    [data-reveal].is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    [data-reveal][data-delay="100"] { transition-delay: 80ms; }
+    [data-reveal][data-delay="150"] { transition-delay: 120ms; }
+    [data-reveal][data-delay="200"] { transition-delay: 160ms; }
+    [data-reveal][data-delay="250"] { transition-delay: 200ms; }
+    [data-reveal][data-delay="300"] { transition-delay: 240ms; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      [data-reveal] { opacity: 1; transform: none; }
+    }
+
+    /* ─── Chatbot bubble — más llamativo ─────── */
+    .wgp-chat__bubble {
+      width: 64px !important;
+      height: 64px !important;
+      box-shadow:
+        0 8px 24px rgba(14, 165, 233, 0.45),
+        0 0 0 0 rgba(14, 165, 233, 0.55) !important;
+      animation: wgp-bubble-pulse 2.4s var(--ease-out) infinite;
+    }
+    .wgp-chat__bubble svg { width: 30px !important; height: 30px !important; }
+    .wgp-chat[data-state="open"] .wgp-chat__bubble {
+      animation: none;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35) !important;
+    }
+
+    @keyframes wgp-bubble-pulse {
+      0%, 100% {
+        box-shadow:
+          0 8px 24px rgba(14, 165, 233, 0.45),
+          0 0 0 0 rgba(14, 165, 233, 0.55);
+      }
+      70% {
+        box-shadow:
+          0 8px 24px rgba(14, 165, 233, 0.45),
+          0 0 0 18px rgba(14, 165, 233, 0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .wgp-chat__bubble { animation: none; }
+    }
+  </style>
+  <style>
+    /* Prototipo B — Premium Navy + Orange */
+    :root {
+      --primary: #E13419;
+      --primary-dark: #B82A13;
+    }
+    .btn-primary { color: #fff; }
+    .btn-primary:hover { background: #c42e12; }
+    .form-submit { color: #fff; }
+    .form-submit:hover { background: #c42e12; }
+    .works-carousel__nav:hover {
+      background: var(--primary); border-color: var(--primary); color: #fff;
+    }
+    .lightbox__close:hover, .lightbox__nav:hover {
+      background: var(--primary); border-color: var(--primary); color: #fff;
+    }
+    .nav-cta:hover { border-color: var(--primary); color: var(--primary); }
+    .brand-img { height: 40px; width: auto; display: block; }
+    .hero { position: relative; }
+    .hero::after {
+      content: ''; position: absolute; inset: 0;
+      background: url('assets/trama-hueso.png') repeat;
+      opacity: .045; pointer-events: none; z-index: 0;
+    }
+    .hero > * { position: relative; z-index: 1; }
+    ::selection { background: var(--primary); color: #fff; }
+    .proto-badge {
+      position: fixed; bottom: 1.5rem; left: 1.5rem; z-index: 9999;
+      background: #E13419; color: #fff; padding: .4rem .9rem;
+      font-size: .68rem; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; font-family: sans-serif;
+    }
   </style>
 </head>
 <body>
+  <div class="proto-badge">Prototipo B — Premium Navy</div>
 
-<div class="badge">Prototipo B — Premium Navy</div>
-
-<nav class="nav">
-  <a href="#" class="brand">
-    <svg viewBox="0 0 280 175" fill="var(--cream)" xmlns="http://www.w3.org/2000/svg">
-      <polygon points="12,155 35,155 93,25 70,25"/>
-      <polygon points="70,25 93,25 115,75 92,75"/>
-      <polygon points="128,75 150,25 172,25 145,110 123,110"/>
-    </svg>
-    Airvision
-  </a>
-  <ul class="nav-links">
-    <li><a href="#">Servicios</a></li>
-    <li><a href="#">Trabajos</a></li>
-    <li><a href="#">Sobre</a></li>
-    <li><a href="#">Contacto</a></li>
-  </ul>
-  <a href="#" class="nav-cta"><span class="nav-cta-dot"></span> Tomando proyectos</a>
-</nav>
-
-<section class="hero">
-  <div class="hero-trama"></div>
-  <div>
-    <p class="hero-eyebrow">Buenos Aires · CABA &amp; GBA · 34°36′S</p>
-    <h1 class="hero-title">Una nueva<br><em>perspectiva</em><br>para tus<br>proyectos</h1>
-    <p class="hero-sub">Fotografía y video aéreo profesional con drones. Construcción, inmobiliaria y deportes — entregando material crudo o editado, según lo que tu proyecto necesite.</p>
-    <div class="hero-actions">
-      <a href="#" class="btn btn-primary">Pedir cotización →</a>
-      <a href="#" class="btn btn-outline">Ver trabajos</a>
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#top" class="brand" aria-label="Air Vision inicio">
+        <img src="assets/logo-navy.png" class="brand-img" alt="Airvision">
+      </a>
+      <ul class="nav-links">
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#trabajos">Trabajos</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+      <a href="#contacto" class="nav-cta">
+        <span class="nav-cta-dot"></span>
+        Tomando proyectos
+      </a>
     </div>
-  </div>
-  <div class="hero-visual">
-    <img class="hero-img" src="../img/01-hero.webp" alt="Drone preparado para vuelo">
-  </div>
-</section>
+  </nav>
 
-<div class="stats">
-  <div class="stat"><div class="stat-num">02<span>+</span></div><div class="stat-label">Años en operación</div></div>
-  <div class="stat"><div class="stat-num">3<span>—</span>7</div><div class="stat-label">Días de entrega</div></div>
-  <div class="stat"><div class="stat-num">CABA<span>·</span>GBA</div><div class="stat-label">Cobertura</div></div>
-  <div class="stat"><div class="stat-num">4K<span>↑</span></div><div class="stat-label">Resolución</div></div>
-</div>
+  <main id="top">
 
-<section class="services">
-  <div class="section-top">
-    <span class="section-label">Servicios</span>
-    <h2 class="section-title">Disciplinas en las<br>que volamos</h2>
-  </div>
-  <div class="services-grid">
-    <div class="service-card">
-      <div class="service-num">01 / Construcción</div>
-      <div class="service-img"><img src="../img/02-construccion.webp" alt="Construcción"></div>
-      <h3 class="service-name">Construcción<br>y obra</h3>
-      <p class="service-desc">Avance de obra desde el aire, inspecciones de techos, fachadas y zonas de difícil acceso.</p>
-      <span class="service-cta">Consultar →</span>
+    <!-- ─── HERO ─── -->
+    <section class="hero container">
+      <div class="hero-text">
+        <div class="hero-coords">
+          <span>34°36′S 58°22′W</span>
+          <span>Buenos Aires · Argentina</span>
+        </div>
+
+        <h1 class="hero-title">
+          Una nueva<br>
+          <em>perspectiva</em><br>
+          para tus<br>
+          proyectos
+        </h1>
+
+        <p class="hero-sub">
+          Fotografía y video aéreo profesional con drones. Operamos en CABA y GBA para construcción, inmobiliaria y deportes — entregando material crudo o editado, según lo que tu proyecto necesite.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#" class="btn btn-primary" data-cta="whatsapp" data-message="Hola, vi tu web y quería consultar por una filmación aérea">
+            Pedir cotización
+            <span class="btn-arrow">→</span>
+          </a>
+          <a href="#trabajos" class="btn btn-ghost">
+            Ver trabajos
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="image-slot ratio-portrait">
+          <img src="../img/01-hero.webp" alt="Drone DJI con control remoto preparado para vuelo, en locación natural" loading="eager">
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── STATS ─── -->
+    <section class="stats">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-block" data-reveal>
+            <div class="stat-num">02<span>+</span></div>
+            <div class="stat-label">Años en operación</div>
+          </div>
+          <div class="stat-block" data-reveal data-delay="100">
+            <div class="stat-num">3<span>—</span>7</div>
+            <div class="stat-label">Días de entrega</div>
+          </div>
+          <div class="stat-block" data-reveal data-delay="200">
+            <div class="stat-num">CABA<span>·</span>GBA</div>
+            <div class="stat-label">Cobertura</div>
+          </div>
+          <div class="stat-block" data-reveal data-delay="300">
+            <div class="stat-num">4K<span>↑</span></div>
+            <div class="stat-label">Resolución</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── SERVICIOS ─── -->
+    <section id="servicios" class="container">
+      <div class="services-header">
+        <div data-reveal>
+          <span class="label section-eyebrow">Servicios</span>
+          <h2 class="h-section">Disciplinas en las<br>que volamos</h2>
+        </div>
+        <p class="section-intro" data-reveal data-delay="100">
+          Cada rubro tiene su lenguaje visual. Air Vision se especializa en tres áreas donde la perspectiva aérea aporta un diferencial real al material final.
+        </p>
+      </div>
+
+      <div class="services-grid">
+
+        <article class="service-card" data-reveal>
+          <div class="service-image">
+            <div class="image-slot">
+              <img src="../img/02-construccion.webp" alt="Vista aérea cenital de obra industrial con maquinaria pesada, áridos y contenedores" loading="lazy">
+            </div>
+          </div>
+          <div class="service-body">
+            <span class="service-num">01 / Construcción</span>
+            <h3 class="service-title">Construcción<br>y obra</h3>
+            <p class="service-desc">
+              Avance de obra desde el aire, inspecciones de techos, fachadas y zonas de difícil acceso. Material periódico para reportes a clientes, inversores o auditorías.
+            </p>
+            <a href="#" class="service-link" data-cta="whatsapp" data-message="Hola, quiero consultar sobre filmación aérea para construcción / obra">
+              Consultar <span class="service-arrow">→</span>
+            </a>
+          </div>
+        </article>
+
+        <article class="service-card" data-reveal data-delay="100">
+          <div class="service-image">
+            <div class="image-slot">
+              <img src="../img/03-inmobiliaria.webp" alt="Vista aérea nocturna de propiedad residencial con pileta" loading="lazy">
+            </div>
+          </div>
+          <div class="service-body">
+            <span class="service-num">02 / Inmobiliaria</span>
+            <h3 class="service-title">Inmobiliaria</h3>
+            <p class="service-desc">
+              Filmación y fotografía aérea de propiedades, departamentos, casas, lotes y terrenos. Material que diferencia un listado y vende más rápido.
+            </p>
+            <a href="#" class="service-link" data-cta="whatsapp" data-message="Hola, soy de inmobiliaria y quiero consultar por filmación aérea de propiedades">
+              Consultar <span class="service-arrow">→</span>
+            </a>
+          </div>
+        </article>
+
+        <article class="service-card" data-reveal data-delay="200">
+          <div class="service-image">
+            <div class="image-slot">
+              <img src="../img/04-deportes.webp" alt="Vista aérea de evento deportivo / locación outdoor" loading="lazy">
+            </div>
+          </div>
+          <div class="service-body">
+            <span class="service-num">03 / Deportes</span>
+            <h3 class="service-title">Deportes y<br>aventura</h3>
+            <p class="service-desc">
+              Filmación de eventos deportivos, motorsport, deportes outdoor y de aventura. Tomas dinámicas con seguimiento aéreo, ideales para coberturas, productoras y atletas.
+            </p>
+            <a href="#" class="service-link" data-cta="whatsapp" data-message="Hola, quiero consultar por filmación aérea para un evento deportivo">
+              Consultar <span class="service-arrow">→</span>
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ─── TRABAJOS ─── -->
+    <section id="trabajos" class="container">
+      <div class="works-header">
+        <div data-reveal>
+          <span class="label section-eyebrow">Trabajos</span>
+          <h2 class="h-section">Material<br>seleccionado</h2>
+        </div>
+        <p class="section-intro" data-reveal data-delay="100">
+          Una selección de filmaciones y fotografías aéreas — material crudo y editado de proyectos en distintos rubros.
+        </p>
+      </div>
+
+      <div class="works-carousel" data-reveal>
+
+        <div class="works-carousel__progress" aria-hidden="true">
+          <div class="works-carousel__progress-bar" data-carousel-progress></div>
+        </div>
+
+        <div class="works-carousel__counter" aria-hidden="true">
+          <span data-carousel-current>01</span><span class="total"> / 06</span>
+        </div>
+
+        <button class="works-carousel__nav works-carousel__nav--prev" aria-label="Trabajo anterior" data-carousel-prev>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m15 18-6-6 6-6"/>
+          </svg>
+        </button>
+
+        <div class="works-carousel__viewport">
+          <div class="works-carousel__track" data-carousel-track>
+
+            <div class="works-carousel__slide" data-tag="Reel" data-caption="Reel de trabajos aéreos">
+              <div class="image-slot">
+                <video
+                  src="../img/05-trabajo-1.mp4"
+                  poster="../img/05-trabajo-1-poster.webp"
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                  aria-label="Reel de trabajos aéreos"></video>
+              </div>
+            </div>
+
+            <div class="works-carousel__slide" data-tag="Fotografía" data-caption="Toma aérea de proyecto">
+              <div class="image-slot">
+                <img src="../img/06-trabajo-2.webp" alt="Fotografía aérea de proyecto" loading="lazy">
+              </div>
+            </div>
+
+            <div class="works-carousel__slide" data-tag="Fotografía" data-caption="Vista cenital desde el aire">
+              <div class="image-slot">
+                <img src="../img/07-trabajo-3.webp" alt="Fotografía aérea de proyecto" loading="lazy">
+              </div>
+            </div>
+
+            <div class="works-carousel__slide" data-tag="Fotografía" data-caption="Perspectiva aérea profesional">
+              <div class="image-slot">
+                <img src="../img/08-trabajo-4.webp" alt="Fotografía aérea de proyecto" loading="lazy">
+              </div>
+            </div>
+
+            <div class="works-carousel__slide" data-tag="Fotografía" data-caption="Composición desde altura">
+              <div class="image-slot">
+                <img src="../img/09-trabajo-5.webp" alt="Fotografía aérea de proyecto" loading="lazy">
+              </div>
+            </div>
+
+            <div class="works-carousel__slide" data-tag="Video" data-caption="Cobertura aérea motorsport">
+              <div class="image-slot">
+                <video
+                  src="../img/10-sobre.mp4"
+                  poster="../img/10-sobre-poster.webp"
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                  aria-label="Cobertura aérea motorsport"></video>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="works-carousel__expand-hint" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+          </div>
+          <div class="works-carousel__caption" data-carousel-caption aria-hidden="true">
+            <span class="works-carousel__caption-tag" data-caption-tag></span>
+            <span class="works-carousel__caption-title" data-caption-title></span>
+          </div>
+        </div>
+
+        <button class="works-carousel__nav works-carousel__nav--next" aria-label="Trabajo siguiente" data-carousel-next>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m9 18 6-6-6-6"/>
+          </svg>
+        </button>
+
+        <div class="works-carousel__thumbs" data-carousel-thumbs aria-label="Miniaturas de trabajos"></div>
+      </div>
+    </section>
+
+    <!-- ─── SOBRE ─── -->
+    <section id="sobre" class="container">
+      <div class="about">
+        <div data-reveal>
+          <span class="label section-eyebrow">Sobre Air Vision</span>
+          <h2 class="h-section">Cada proyecto<br>tiene su <strong>ángulo</strong>.</h2>
+
+          <div class="about-body">
+            <p>
+              Air Vision es un servicio de fotografía y video aéreo dirigido por un piloto de drones con dos años de experiencia operando en Buenos Aires. La práctica empezó como exploración técnica y se convirtió en oficio.
+            </p>
+            <p>
+              Cada proyecto se aborda como un caso único. La entrega se adapta al flujo de trabajo del cliente — material totalmente editado o footage crudo, lo que se necesite. Sin paquetes prefabricados.
+            </p>
+          </div>
+
+          <ul class="credentials">
+            <li>
+              <span class="key">Experiencia</span>
+              <span class="val">2 años en operación profesional</span>
+            </li>
+            <li>
+              <span class="key">Operación</span>
+              <span class="val">CABA y GBA</span>
+            </li>
+            <li>
+              <span class="key">Entrega</span>
+              <span class="val">Crudo o editado, según necesidad</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── FAQ ─── -->
+    <section id="faq" class="container">
+      <div class="faq-grid">
+        <div data-reveal>
+          <span class="label section-eyebrow">Preguntas</span>
+          <h2 class="h-section">Lo que<br>suelen<br>preguntar</h2>
+          <p class="section-intro" style="margin-top:1.25rem;">
+            Si tu duda no aparece acá, escribime por WhatsApp o usá el formulario más abajo.
+          </p>
+        </div>
+
+        <div class="faq-list" data-reveal data-delay="100">
+
+          <div class="faq-item">
+            <span class="faq-num">01</span>
+            <div>
+              <h3 class="faq-q">¿En qué zonas operás?</h3>
+              <p class="faq-a">Operamos en CABA (Capital Federal) y todo el GBA (Gran Buenos Aires). Para trabajos fuera de esa zona, consultar por WhatsApp para evaluar viabilidad y costos de traslado.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <span class="faq-num">02</span>
+            <div>
+              <h3 class="faq-q">¿Cuánto demora la entrega del material?</h3>
+              <p class="faq-a">El tiempo estimado de entrega es de 3 a 7 días hábiles según la complejidad del trabajo y el tipo de edición acordada. Para urgencias podés consultar por WhatsApp y vemos disponibilidad.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <span class="faq-num">03</span>
+            <div>
+              <h3 class="faq-q">¿Entregás material editado o crudo?</h3>
+              <p class="faq-a">Se entrega como el cliente necesite. Material crudo (footage sin editar) para que tu equipo lo trabaje, o material totalmente editado y listo para publicar. Lo definimos antes de empezar.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <span class="faq-num">04</span>
+            <div>
+              <h3 class="faq-q">¿Qué pasa si el clima no acompaña?</h3>
+              <p class="faq-a">No se vuela en condiciones climáticas adversas (lluvia, viento fuerte, baja visibilidad). La decisión queda a criterio del piloto, priorizando seguridad y calidad del material. Si hay que reagendar, lo coordinamos sin costo adicional.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <span class="faq-num">05</span>
+            <div>
+              <h3 class="faq-q">¿Cómo se cotiza un trabajo?</h3>
+              <p class="faq-a">Cada proyecto se cotiza a medida según ubicación, duración del trabajo, tipo de entrega y complejidad. Contame qué necesitás por WhatsApp o el formulario y armamos un presupuesto.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <span class="faq-num">06</span>
+            <div>
+              <h3 class="faq-q">¿Qué tipo de proyectos hiciste antes?</h3>
+              <p class="faq-a">Trabajos en los tres rubros principales: filmación inmobiliaria, avance de obra para construcción y cobertura aérea de eventos deportivos. Cada caso se aborda con un enfoque distinto según el resultado que necesite el cliente. Para conocer ejemplos específicos, podemos coordinar una llamada o videollamada.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── CONTACTO ─── -->
+    <section id="contacto" class="container">
+      <div class="contact-wrap">
+
+        <div data-reveal>
+          <span class="label section-eyebrow">Contacto</span>
+          <h2 class="h-section">Contame<br>qué <strong>querés volar</strong>.</h2>
+          <p class="contact-lead">
+            Mandame los detalles del proyecto — ubicación, tipo de trabajo, fecha estimada — y te devuelvo una cotización a medida en menos de 24 hs hábiles.
+          </p>
+
+          <div class="contact-channels">
+            <a class="contact-channel" data-cta="whatsapp" data-message="Hola, vi tu web y quería consultar">
+              <svg class="channel-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M21 11.5a8.5 8.5 0 0 1-12.83 7.31L3 20l1.27-4.5A8.5 8.5 0 1 1 21 11.5Z"/>
+              </svg>
+              <div class="channel-meta">
+                <span class="channel-label">WhatsApp · respuesta directa</span>
+                <span class="channel-val">+54 9 11 3108-3110</span>
+              </div>
+            </a>
+
+            <a class="contact-channel" href="mailto:agostinellifranco2002@gmail.com">
+              <svg class="channel-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="5" width="18" height="14" rx="2"/>
+                <path d="m3 7 9 6 9-6"/>
+              </svg>
+              <div class="channel-meta">
+                <span class="channel-label">Email</span>
+                <span class="channel-val">agostinellifranco2002@gmail.com</span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="form-card" data-reveal data-delay="100">
+          <div class="form-eyebrow">Briefing rápido</div>
+          <h3 class="form-h">Pedí tu cotización</h3>
+
+          <form data-form="contact" novalidate>
+            <div class="form-row">
+              <div class="field">
+                <label for="f-name">Nombre</label>
+                <input id="f-name" name="name" type="text" required autocomplete="name" placeholder="Tu nombre">
+              </div>
+              <div class="field">
+                <label for="f-phone">Teléfono</label>
+                <input id="f-phone" name="phone" type="tel" required autocomplete="tel" placeholder="+54 9 11 …">
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="f-email">Email</label>
+              <input id="f-email" name="email" type="email" required autocomplete="email" placeholder="tu@email.com">
+            </div>
+
+            <div class="field">
+              <label for="f-message">Sobre el proyecto</label>
+              <textarea id="f-message" name="message" required placeholder="Tipo de trabajo, ubicación, fecha estimada, formato de entrega que necesitás…"></textarea>
+            </div>
+
+            <button type="submit" class="form-submit">
+              Enviar briefing
+              <span class="btn-arrow">→</span>
+            </button>
+
+            <p class="form-note">Te respondo en menos de 24 hs hábiles. Tus datos no se comparten.</p>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─── LIGHTBOX ─── -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Vista ampliada">
+      <div class="lightbox__inner">
+        <button class="lightbox__close" data-lightbox-close aria-label="Cerrar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+        <button class="lightbox__nav lightbox__nav--prev" data-lightbox-prev aria-label="Anterior">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <div data-lightbox-content></div>
+        <button class="lightbox__nav lightbox__nav--next" data-lightbox-next aria-label="Siguiente">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+        <div class="lightbox__counter" data-lightbox-counter></div>
+      </div>
     </div>
-    <div class="service-card">
-      <div class="service-num">02 / Inmobiliaria</div>
-      <div class="service-img"><img src="../img/03-inmobiliaria.webp" alt="Inmobiliaria"></div>
-      <h3 class="service-name">Inmobiliaria</h3>
-      <p class="service-desc">Filmación y fotografía aérea de propiedades. Material que diferencia un listado y vende más rápido.</p>
-      <span class="service-cta">Consultar →</span>
-    </div>
-    <div class="service-card">
-      <div class="service-num">03 / Deportes</div>
-      <div class="service-img"><img src="../img/04-deportes.webp" alt="Deportes"></div>
-      <h3 class="service-name">Deportes<br>y aventura</h3>
-      <p class="service-desc">Filmación de eventos deportivos, motorsport y deportes outdoor. Tomas dinámicas con seguimiento aéreo.</p>
-      <span class="service-cta">Consultar →</span>
-    </div>
-  </div>
-</section>
 
-<section class="banner">
-  <h2 class="banner-title">Contame qué<br>querés volar.</h2>
-  <a href="#" class="btn-white">Pedir cotización →</a>
-</section>
+  </main>
 
-<footer>
-  <div class="brand">
-    <svg viewBox="0 0 280 175" fill="var(--cream)" width="26"><polygon points="12,155 35,155 93,25 70,25"/><polygon points="70,25 93,25 115,75 92,75"/><polygon points="128,75 150,25 172,25 145,110 123,110"/></svg>
-    Airvision
-  </div>
-  <span>© 2025 Airvision · Buenos Aires, Argentina</span>
-</footer>
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="brand">
+            <img src="assets/logo-navy.png" class="brand-img" alt="Airvision">
+          </div>
+          <p class="footer-brand-text">
+            Fotografía y video aéreo profesional con drones. Una nueva perspectiva para tus proyectos en CABA y GBA.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Servicios</h5>
+          <ul>
+            <li><a href="#servicios">Construcción / obra</a></li>
+            <li><a href="#servicios">Inmobiliaria</a></li>
+            <li><a href="#servicios">Deportes / aventura</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Contacto</h5>
+          <ul>
+            <li><a href="#" data-cta="whatsapp">WhatsApp</a></li>
+            <li><a href="mailto:agostinellifranco2002@gmail.com">Email</a></li>
+            <li><a href="#contacto">Pedir cotización</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Air Vision · Buenos Aires, Argentina</span>
+        <span>34°36′S · 58°22′W</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll state
+    const nav = document.getElementById('nav');
+    const onScroll = () => {
+      if (window.scrollY > 24) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Reveal on scroll
+    if ('IntersectionObserver' in window) {
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-visible');
+            obs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('[data-reveal]').forEach(el => obs.observe(el));
+    } else {
+      document.querySelectorAll('[data-reveal]').forEach(el => el.classList.add('is-visible'));
+    }
+
+
+    // ─── Trabajos carousel ─────────────────────
+    (() => {
+      const track = document.querySelector('[data-carousel-track]');
+      if (!track) return;
+      const slides = Array.from(track.children);
+      const total = slides.length;
+      const thumbsWrap = document.querySelector('[data-carousel-thumbs]');
+      const counter = document.querySelector('[data-carousel-current]');
+      const prevBtn = document.querySelector('[data-carousel-prev]');
+      const nextBtn = document.querySelector('[data-carousel-next]');
+      const carousel = document.querySelector('.works-carousel');
+      const captionEl = document.querySelector('[data-carousel-caption]');
+      const captionTag = document.querySelector('[data-caption-tag]');
+      const captionTitle = document.querySelector('[data-caption-title]');
+      const progressBar = document.querySelector('[data-carousel-progress]');
+
+      let index = 0;
+      let timer;
+      let progressTimer;
+      let isHovering = false;
+      const AUTO_MS = 5500;
+
+      // Build thumbnails
+      slides.forEach((slide, i) => {
+        const thumb = document.createElement('button');
+        thumb.type = 'button';
+        thumb.className = 'works-carousel__thumb';
+        thumb.setAttribute('aria-label', `Ir al trabajo ${i + 1}`);
+
+        const video = slide.querySelector('video');
+        const img = slide.querySelector('img');
+
+        if (video) {
+          const poster = video.getAttribute('poster');
+          if (poster) {
+            const tImg = document.createElement('img');
+            tImg.src = poster;
+            tImg.alt = '';
+            tImg.loading = 'lazy';
+            thumb.appendChild(tImg);
+          } else {
+            thumb.innerHTML = `<span class="works-carousel__thumb-play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,4 20,12 6,20"/></svg></span>`;
+          }
+        } else if (img) {
+          const tImg = document.createElement('img');
+          tImg.src = img.src;
+          tImg.alt = '';
+          tImg.loading = 'lazy';
+          thumb.appendChild(tImg);
+        }
+
+        thumb.addEventListener('click', () => go(i));
+        thumbsWrap.appendChild(thumb);
+      });
+
+      const thumbBtns = Array.from(thumbsWrap.children);
+
+      function updateCaption(n) {
+        if (!captionEl) return;
+        const slide = slides[n];
+        const tag = slide.dataset.tag || '';
+        const title = slide.dataset.caption || '';
+        captionEl.classList.remove('is-visible');
+        requestAnimationFrame(() => {
+          if (captionTag) captionTag.textContent = tag;
+          if (captionTitle) captionTitle.textContent = title;
+          requestAnimationFrame(() => captionEl.classList.add('is-visible'));
+        });
+      }
+
+      function startProgress(ms) {
+        if (!progressBar) return;
+        progressBar.classList.remove('is-running');
+        progressBar.style.width = '0%';
+        clearTimeout(progressTimer);
+        progressTimer = setTimeout(() => {
+          progressBar.style.transitionDuration = ms + 'ms';
+          progressBar.classList.add('is-running');
+          progressBar.style.width = '100%';
+        }, 30);
+      }
+
+      function stopProgress() {
+        if (!progressBar) return;
+        clearTimeout(progressTimer);
+        progressBar.classList.remove('is-running');
+        progressBar.style.width = '0%';
+      }
+
+      function go(n) {
+        index = (n + total) % total;
+        track.style.transform = `translateX(-${index * 100}%)`;
+        thumbBtns.forEach((t, i) => t.classList.toggle('works-carousel__thumb--active', i === index));
+        if (counter) counter.textContent = String(index + 1).padStart(2, '0');
+        updateCaption(index);
+        slides.forEach((s, i) => {
+          const v = s.querySelector('video');
+          if (!v) return;
+          if (i === index) { v.currentTime = 0; v.play().catch(() => {}); }
+          else { v.pause(); }
+        });
+        scheduleAuto();
+      }
+
+      function next() { go(index + 1); }
+      function prev() { go(index - 1); }
+
+      function scheduleAuto() {
+        clearTimeout(timer);
+        if (isHovering) return;
+        const activeVideo = slides[index]?.querySelector('video');
+        const delay = activeVideo
+          ? Math.max(AUTO_MS, (activeVideo.duration || 6) * 1000)
+          : AUTO_MS;
+        startProgress(delay);
+        timer = setTimeout(next, delay);
+      }
+
+      prevBtn.addEventListener('click', prev);
+      nextBtn.addEventListener('click', next);
+
+      carousel.addEventListener('mouseenter', () => { isHovering = true; clearTimeout(timer); stopProgress(); });
+      carousel.addEventListener('mouseleave', () => { isHovering = false; scheduleAuto(); });
+
+      let touchStartX = 0, touchStartY = 0;
+      track.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+      }, { passive: true });
+      track.addEventListener('touchend', (e) => {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        const dy = e.changedTouches[0].clientY - touchStartY;
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) dx > 0 ? prev() : next();
+      });
+
+      window.addEventListener('keydown', (e) => {
+        const rect = carousel.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          if (e.key === 'ArrowLeft') prev();
+          else if (e.key === 'ArrowRight') next();
+        }
+      });
+
+      if ('IntersectionObserver' in window) {
+        const cobs = new IntersectionObserver((entries) => {
+          entries.forEach(e => {
+            if (e.isIntersecting) scheduleAuto();
+            else { clearTimeout(timer); stopProgress(); }
+          });
+        }, { threshold: 0.3 });
+        cobs.observe(carousel);
+      }
+
+      go(0);
+
+      // ─── Lightbox ──────────────────────────
+      (() => {
+        const lightbox = document.getElementById('lightbox');
+        if (!lightbox) return;
+        const lbContent = lightbox.querySelector('[data-lightbox-content]');
+        const lbCounter = lightbox.querySelector('[data-lightbox-counter]');
+        let lbIdx = 0;
+        let isLbOpen = false;
+
+        function renderLb(n) {
+          lbIdx = (n + total) % total;
+          const slide = slides[lbIdx];
+          const video = slide.querySelector('video');
+          const img = slide.querySelector('img');
+          lbContent.innerHTML = '';
+
+          if (video) {
+            const v = document.createElement('video');
+            v.src = video.src;
+            v.controls = true;
+            v.autoplay = true;
+            v.muted = true;
+            v.loop = true;
+            v.playsinline = true;
+            lbContent.appendChild(v);
+            v.play().catch(() => {});
+          } else if (img) {
+            const i = document.createElement('img');
+            i.src = img.src;
+            i.alt = img.alt || '';
+            lbContent.appendChild(i);
+          }
+          if (lbCounter) lbCounter.textContent = `${String(lbIdx + 1).padStart(2,'0')} / ${String(total).padStart(2,'0')}`;
+        }
+
+        function openLb(n) {
+          renderLb(n);
+          lightbox.classList.add('is-open');
+          document.body.style.overflow = 'hidden';
+          isLbOpen = true;
+        }
+
+        function closeLb() {
+          lightbox.classList.remove('is-open');
+          document.body.style.overflow = '';
+          isLbOpen = false;
+          setTimeout(() => { lbContent.innerHTML = ''; }, 300);
+        }
+
+        // Click en slide activo abre lightbox
+        let ptrDownX = 0, ptrDownY = 0;
+        track.addEventListener('pointerdown', (e) => { ptrDownX = e.clientX; ptrDownY = e.clientY; });
+        track.addEventListener('click', (e) => {
+          if (Math.abs(e.clientX - ptrDownX) > 6 || Math.abs(e.clientY - ptrDownY) > 6) return;
+          openLb(index);
+        });
+
+        lightbox.querySelector('[data-lightbox-close]').addEventListener('click', closeLb);
+        lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLb(); });
+        lightbox.querySelector('[data-lightbox-prev]').addEventListener('click', (e) => { e.stopPropagation(); renderLb(lbIdx - 1); });
+        lightbox.querySelector('[data-lightbox-next]').addEventListener('click', (e) => { e.stopPropagation(); renderLb(lbIdx + 1); });
+
+        window.addEventListener('keydown', (e) => {
+          if (!isLbOpen) return;
+          if (e.key === 'Escape') closeLb();
+          else if (e.key === 'ArrowLeft') renderLb(lbIdx - 1);
+          else if (e.key === 'ArrowRight') renderLb(lbIdx + 1);
+        });
+
+        let lbTouchX = 0;
+        lightbox.addEventListener('touchstart', (e) => { lbTouchX = e.touches[0].clientX; }, { passive: true });
+        lightbox.addEventListener('touchend', (e) => {
+          const dx = e.changedTouches[0].clientX - lbTouchX;
+          if (Math.abs(dx) > 50) dx > 0 ? renderLb(lbIdx - 1) : renderLb(lbIdx + 1);
+        });
+      })();
+
+    })();
+  </script>
+
+  <!-- ─── DATA + BACKEND ─── -->
+  <script>
+    window.PROJECT_DATA = {
+      empresa_nombre: "Air Vision",
+
+      config: {
+        whatsapp_numero: "5491131083110",
+        whatsapp_mensaje_default: "Hola Air Vision, quería consultar por una filmación aérea",
+        formspree_id: "DESACTIVADO",
+        colors: {
+          primary: "#0EA5E9",
+          primary_dark: "#0369A1"
+        }
+      },
+
+      chatbot: {
+        nombre: "Asistente Air Vision",
+        saludo: "Hola, soy el asistente de Air Vision. Puedo contarte sobre filmación aérea, zonas, tiempos de entrega y más. ¿Qué querés saber?"
+      },
+
+      web_content: {
+        hero: {
+          titulo: "Una nueva perspectiva para tus proyectos",
+          subtitulo: "Fotografía y video aéreo profesional con drones en CABA y GBA. Construcción, inmobiliaria y deportes."
+        },
+
+        quienes_somos: {
+          texto: "Air Vision es un servicio de fotografía y video aéreo dirigido por un piloto de drones con 2 años de experiencia operando en Buenos Aires. Cada proyecto se entrega con el formato que el cliente necesite: material editado o crudo."
+        },
+
+        servicios: [
+          {
+            titulo: "Construcción y Obra",
+            descripcion: "Avance de obra documentado desde el aire, inspecciones de techos, fachadas y zonas de difícil acceso. Material periódico para reportes a clientes, inversores o auditorías.",
+            keywords: ["construccion", "obra", "avance", "inspeccion", "edificio", "techo", "fachada", "constructora", "ingenieria", "arquitectura", "proyecto", "auditoria", "informe"]
+          },
+          {
+            titulo: "Inmobiliaria",
+            descripcion: "Filmación y fotografía aérea de propiedades, departamentos, casas, lotes y terrenos. Material que diferencia un listado y vende más rápido.",
+            keywords: ["inmobiliaria", "propiedad", "departamento", "casa", "terreno", "lote", "venta", "alquiler", "broker", "inmueble", "real estate", "remax", "vivienda", "duplex", "ph"]
+          },
+          {
+            titulo: "Deportes y Aventura",
+            descripcion: "Filmación de eventos deportivos, carreras, motorsport, deportes outdoor y de aventura. Tomas dinámicas con seguimiento aéreo, ideales para coberturas, productoras y atletas.",
+            keywords: ["deporte", "evento", "carrera", "motorsport", "auto", "moto", "outdoor", "aventura", "atleta", "competencia", "deportivo", "produccion"]
+          }
+        ],
+
+        faq: [
+          {
+            pregunta: "¿En qué zonas operás?",
+            respuesta: "Operamos en CABA (Capital Federal) y todo el GBA (Gran Buenos Aires). Para trabajos fuera de esa zona, consultar por WhatsApp para evaluar viabilidad y costos de traslado.",
+            keywords: ["zona", "donde", "operan", "operas", "lugar", "ubicacion", "caba", "gba", "buenos aires", "capital", "provincia", "viajan", "interior", "cobertura", "area"]
+          },
+          {
+            pregunta: "¿Cuánto demora la entrega del material?",
+            respuesta: "El tiempo estimado de entrega es de 3 a 7 días hábiles según la complejidad del trabajo y el tipo de edición acordada. Para urgencias podés consultar por WhatsApp y vemos disponibilidad.",
+            keywords: ["tiempo", "demora", "tardan", "entrega", "plazo", "cuando", "rapido", "urgente", "dias", "espera", "listo", "edicion"]
+          },
+          {
+            pregunta: "¿Entregás material editado o crudo?",
+            respuesta: "Se entrega como el cliente necesite. Podemos entregar material crudo (footage sin editar) para que tu equipo lo trabaje, o material totalmente editado y listo para publicar. Lo definimos antes de empezar.",
+            keywords: ["editar", "edicion", "editado", "crudo", "bruto", "footage", "material", "raw", "sin editar", "entrega", "formato", "video", "post produccion"]
+          },
+          {
+            pregunta: "¿Qué pasa si el clima no acompaña?",
+            respuesta: "No se vuela en condiciones climáticas adversas (lluvia, viento fuerte, baja visibilidad). La decisión queda a criterio del piloto, priorizando seguridad y calidad del material. Si hay que reagendar, lo coordinamos sin costo adicional.",
+            keywords: ["clima", "lluvia", "viento", "tormenta", "vuela", "vuelan", "condiciones", "reagendar", "cancelar", "tiempo", "mal tiempo", "seguridad", "viable"]
+          },
+          {
+            pregunta: "¿Cómo se cotiza un trabajo?",
+            respuesta: "Cada proyecto se cotiza a medida según ubicación, duración del trabajo, tipo de entrega (crudo o editado) y complejidad. Contame qué necesitás por WhatsApp o el formulario y armamos un presupuesto.",
+            keywords: ["precio", "precios", "costo", "cotizar", "cotizacion", "presupuesto", "cuanto", "valor", "tarifa", "honorarios", "pagar", "salir"]
+          },
+          {
+            pregunta: "¿Qué tipo de proyectos hiciste antes?",
+            respuesta: "Trabajos en los tres rubros principales: filmación inmobiliaria, avance de obra para construcción y cobertura aérea de eventos deportivos. Cada caso se aborda con un enfoque distinto según el resultado que necesite el cliente. Para conocer ejemplos específicos, podemos coordinar una llamada.",
+            keywords: ["experiencia", "trabajos", "antes", "proyectos", "portfolio", "ejemplo", "muestra", "trayectoria", "antiguedad", "rubros"]
+          }
+        ],
+
+        precios: {
+          planes: [
+            {
+              nombre: "Cotización a medida",
+              rango: "Consultar",
+              incluye: [
+                "Análisis del proyecto y locación",
+                "Plan de vuelo personalizado",
+                "Filmación / fotografía aérea según objetivo",
+                "Material entregado en el formato que necesites (crudo o editado)",
+                "Asesoramiento sobre el mejor uso del material"
+              ]
+            }
+          ]
+        }
+      }
+    };
+  </script>
+  <script src="core.js"></script>
 
 </body>
 </html>
