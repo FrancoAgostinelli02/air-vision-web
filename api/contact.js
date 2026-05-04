@@ -14,6 +14,8 @@ export default async function handler(req, res) {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
+        'Origin': 'https://proyecto-air-vision.vercel.app',
+        'Referer': 'https://proyecto-air-vision.vercel.app/',
       },
       body: JSON.stringify(req.body),
     });
