@@ -473,7 +473,7 @@
       }
       const message = customMessage || cfg.whatsapp_mensaje_default || 'Hola, quería hacer una consulta';
       const url = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
-      window.open(url, '_blank', 'noopener');
+      window.open(url, '_blank', 'noopener,noreferrer');
     },
 
     setupFloatingButton(config) {
@@ -532,12 +532,6 @@
 
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const formspreeId = config.formspree_id;
-        if (!formspreeId) {
-          console.error('[WebGenPro] formspree_id no configurado');
-          this._showModal('error', 'Configuración pendiente. Contactanos por WhatsApp.', config);
-          return;
-        }
 
         // Honeypot check
         if (form.querySelector('[name="_gotcha"]').value) return;
@@ -549,10 +543,13 @@
 
         try {
           const formData = new FormData(form);
-          const response = await fetch(`https://formspree.io/f/${formspreeId}`, {
+          const body = {};
+          formData.forEach((val, key) => { if (key !== '_gotcha') body[key] = val; });
+
+          const response = await fetch('/api/contact', {
             method: 'POST',
-            body: formData,
-            headers: { 'Accept': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify(body),
           });
 
           if (response.ok) {
@@ -560,8 +557,7 @@
             this._showModal('success', '¡Mensaje enviado! Te contactamos a la brevedad.', config);
           } else {
             const data = await response.json().catch(() => ({}));
-            const msg = data.errors ? data.errors.map(e => e.message).join(', ') : 'Hubo un error.';
-            throw new Error(msg);
+            throw new Error(data.error || 'Hubo un error.');
           }
         } catch (err) {
           this._showModal('error', 'No pudimos enviar el mensaje. Probá por WhatsApp.', config);
@@ -581,6 +577,7 @@
       const modal = document.createElement('div');
       modal.dataset.wgpModal = '';
       modal.className = `wgp-modal wgp-modal--${type}`;
+      const safeMessage = (() => { const d = document.createElement('div'); d.textContent = message; return d.innerHTML; })();
       modal.innerHTML = `
         <div class="wgp-modal__overlay" data-modal-close></div>
         <div class="wgp-modal__box" role="dialog" aria-modal="true" aria-labelledby="wgp-modal-title">
@@ -591,7 +588,7 @@
             }
           </div>
           <h3 id="wgp-modal-title" class="wgp-modal__title">${type === 'success' ? '¡Listo!' : 'Algo salió mal'}</h3>
-          <p class="wgp-modal__text">${message}</p>
+          <p class="wgp-modal__text">${safeMessage}</p>
           <div class="wgp-modal__actions">
             ${type === 'error'
               ? '<button type="button" class="wgp-modal__btn wgp-modal__btn--alt" data-cta="whatsapp">Abrir WhatsApp</button>'
@@ -899,10 +896,13 @@
     // 4. Form
     ContactForm.setup(config);
 
-    // Exponer API mínima para uso externo
+    // API mínima solo como función, sin exponer versión ni metadatos
     window.WebGenPro = {
-      openWhatsApp: (msg) => WhatsAppHandler.open(config, msg),
-      version: '1.0.0',
+      openWhatsApp: (msg) => {
+        if (typeof msg !== 'string') return;
+        const safe = msg.slice(0, 500);
+        WhatsAppHandler.open(config, safe);
+      },
     };
   }
 
