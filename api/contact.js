@@ -9,6 +9,9 @@ export default async function handler(req, res) {
   }
 
   try {
+    const bodyToSend = JSON.stringify(req.body);
+    console.log('[contact] body recibido:', bodyToSend);
+
     const response = await fetch(`https://formspree.io/f/${formspreeId}`, {
       method: 'POST',
       headers: {
@@ -17,10 +20,11 @@ export default async function handler(req, res) {
         'Origin': 'https://proyecto-air-vision.vercel.app',
         'Referer': 'https://proyecto-air-vision.vercel.app/',
       },
-      body: JSON.stringify(req.body),
+      body: bodyToSend,
     });
 
     const data = await response.json();
+    console.log('[contact] formspree status:', response.status, JSON.stringify(data));
 
     if (response.ok) {
       return res.status(200).json({ ok: true });
@@ -28,7 +32,8 @@ export default async function handler(req, res) {
 
     const msg = data.errors ? data.errors.map(e => e.message).join(', ') : 'Error al enviar';
     return res.status(response.status).json({ error: msg });
-  } catch {
+  } catch (err) {
+    console.error('[contact] error:', err.message);
     return res.status(500).json({ error: 'Error de red' });
   }
 }
