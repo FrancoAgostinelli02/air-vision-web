@@ -532,6 +532,12 @@
 
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
+        const formspreeId = config.formspree_id;
+        if (!formspreeId) {
+          console.error('[WebGenPro] formspree_id no configurado');
+          this._showModal('error', 'Configuración pendiente. Contactanos por WhatsApp.', config);
+          return;
+        }
 
         // Honeypot check
         if (form.querySelector('[name="_gotcha"]').value) return;
@@ -543,13 +549,10 @@
 
         try {
           const formData = new FormData(form);
-          const body = {};
-          formData.forEach((val, key) => { if (key !== '_gotcha') body[key] = val; });
-
-          const response = await fetch('/api/contact', {
+          const response = await fetch(`https://formspree.io/f/${formspreeId}`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify(body),
+            body: formData,
+            headers: { 'Accept': 'application/json' },
           });
 
           if (response.ok) {
@@ -557,7 +560,8 @@
             this._showModal('success', '¡Mensaje enviado! Te contactamos a la brevedad.', config);
           } else {
             const data = await response.json().catch(() => ({}));
-            throw new Error(data.error || 'Hubo un error.');
+            const msg = data.errors ? data.errors.map(e => e.message).join(', ') : 'Hubo un error.';
+            throw new Error(msg);
           }
         } catch (err) {
           this._showModal('error', 'No pudimos enviar el mensaje. Probá por WhatsApp.', config);
